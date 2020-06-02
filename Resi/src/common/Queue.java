@@ -35,8 +35,8 @@ import java.util.NoSuchElementException;
  * @author Kevin Wayne
  */
 public class Queue<Item> implements Iterable<Item> {
-    private Item[] q;       // queue elements
-    private int n;          // number of elements on queue
+    private Item[] q;       // queue network.elements
+    private int n;          // number of network.elements on queue
     private int first;      // index of first element of queue
     private int last;       // index of next available slot
 
