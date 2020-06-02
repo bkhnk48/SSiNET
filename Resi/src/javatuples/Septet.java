@@ -32,7 +32,7 @@ import javatuples.valueintf.IValue6;
 
 /**
  * <p>
- * A tuple of seven elements.
+ * A tuple of seven network.elements.
  * </p> 
  * 
  * @since 1.0
@@ -71,7 +71,7 @@ public final class Septet<A,B,C,D,E,F,G>
     
     /**
      * <p>
-     * Create tuple from array. Array has to have exactly seven elements.
+     * Create tuple from array. Array has to have exactly seven network.elements.
      * </p>
      * 
      * @param <X> the array component type 
@@ -83,7 +83,7 @@ public final class Septet<A,B,C,D,E,F,G>
             throw new IllegalArgumentException("Array cannot be null");
         }
         if (array.length != 7) {
-            throw new IllegalArgumentException("Array must have exactly 7 elements in order to create a Septet. Size is " + array.length);
+            throw new IllegalArgumentException("Array must have exactly 7 network.elements in order to create a Septet. Size is " + array.length);
         }
         return new Septet<X,X,X,X,X,X,X>(
                 array[0],array[1],array[2],array[3],array[4],
@@ -93,7 +93,7 @@ public final class Septet<A,B,C,D,E,F,G>
     
     /**
      * <p>
-     * Create tuple from collection. Collection has to have exactly seven elements.
+     * Create tuple from collection. Collection has to have exactly seven network.elements.
      * </p>
      * 
      * @param <X> the collection component type 
@@ -108,7 +108,7 @@ public final class Septet<A,B,C,D,E,F,G>
     
     /**
      * <p>
-     * Create tuple from iterable. Iterable has to have exactly seven elements.
+     * Create tuple from iterable. Iterable has to have exactly seven network.elements.
      * </p>
      * 
      * @param <X> the iterable component type 
@@ -124,7 +124,7 @@ public final class Septet<A,B,C,D,E,F,G>
     /**
      * <p>
      * Create tuple from iterable, starting from the specified index. Iterable
-     * can have more (or less) elements than the tuple to be created.
+     * can have more (or less) network.elements than the tuple to be created.
      * </p>
      * 
      * @param <X> the iterable component type 
@@ -209,11 +209,11 @@ public final class Septet<A,B,C,D,E,F,G>
         }
         
         if (tooFewElements && exactSize) {
-            throw new IllegalArgumentException("Not enough elements for creating a Septet (7 needed)");
+            throw new IllegalArgumentException("Not enough network.elements for creating a Septet (7 needed)");
         }
         
         if (iter.hasNext() && exactSize) {
-            throw new IllegalArgumentException("Iterable must have exactly 7 available elements in order to create a Septet.");
+            throw new IllegalArgumentException("Iterable must have exactly 7 available network.elements in order to create a Septet.");
         }
         
         return new Septet<X,X,X,X,X,X,X>(
