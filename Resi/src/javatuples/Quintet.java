@@ -30,7 +30,7 @@ import javatuples.valueintf.IValue4;
 
 /**
  * <p>
- * A tuple of five elements.
+ * A tuple of five network.elements.
  * </p> 
  * 
  * @since 1.0
@@ -65,7 +65,7 @@ public final class Quintet<A,B,C,D,E>
     
     /**
      * <p>
-     * Create tuple from array. Array has to have exactly five elements.
+     * Create tuple from array. Array has to have exactly five network.elements.
      * </p>
      * 
      * @param <X> the array component type 
@@ -77,7 +77,7 @@ public final class Quintet<A,B,C,D,E>
             throw new IllegalArgumentException("Array cannot be null");
         }
         if (array.length != 5) {
-            throw new IllegalArgumentException("Array must have exactly 5 elements in order to create a Quintet. Size is " + array.length);
+            throw new IllegalArgumentException("Array must have exactly 5 network.elements in order to create a Quintet. Size is " + array.length);
         }
         return new Quintet<X,X,X,X,X>(
                 array[0],array[1],array[2],array[3],array[4]);
@@ -86,7 +86,7 @@ public final class Quintet<A,B,C,D,E>
     
     /**
      * <p>
-     * Create tuple from collection. Collection has to have exactly five elements.
+     * Create tuple from collection. Collection has to have exactly five network.elements.
      * </p>
      * 
      * @param <X> the collection component type 
@@ -101,7 +101,7 @@ public final class Quintet<A,B,C,D,E>
     
     /**
      * <p>
-     * Create tuple from iterable. Iterable has to have exactly five elements.
+     * Create tuple from iterable. Iterable has to have exactly five network.elements.
      * </p>
      * 
      * @param <X> the iterable component type 
@@ -117,7 +117,7 @@ public final class Quintet<A,B,C,D,E>
     /**
      * <p>
      * Create tuple from iterable, starting from the specified index. Iterable
-     * can have more (or less) elements than the tuple to be created.
+     * can have more (or less) network.elements than the tuple to be created.
      * </p>
      * 
      * @param <X> the iterable component type 
@@ -188,11 +188,11 @@ public final class Quintet<A,B,C,D,E>
         }
         
         if (tooFewElements && exactSize) {
-            throw new IllegalArgumentException("Not enough elements for creating a Quintet (5 needed)");
+            throw new IllegalArgumentException("Not enough network.elements for creating a Quintet (5 needed)");
         }
         
         if (iter.hasNext() && exactSize) {
-            throw new IllegalArgumentException("Iterable must have exactly 5 available elements in order to create a Quintet.");
+            throw new IllegalArgumentException("Iterable must have exactly 5 available network.elements in order to create a Quintet.");
         }
         
         return new Quintet<X,X,X,X,X>(
