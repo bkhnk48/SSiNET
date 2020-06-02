@@ -7,7 +7,7 @@
  *  
  *  Reads in a list of strings and prints them in random order.
  *  The Knuth (or Fisher-Yates) shuffling algorithm guarantees
- *  to rearrange the elements in uniformly random order, under
+ *  to rearrange the network.elements in uniformly random order, under
  *  the assumption that Math.random() generates independent and
  *  uniformly distributed numbers between 0 and 1.
  *
@@ -49,7 +49,7 @@ package common;
  *  The {@code Knuth} class provides a client for reading in a 
  *  sequence of strings and <em>shuffling</em> them using the Knuth (or Fisher-Yates)
  *  shuffling algorithm. This algorithm guarantees to rearrange the
- *  elements in uniformly random order, under
+ *  network.elements in uniformly random order, under
  *  the assumption that Math.random() generates independent and
  *  uniformly distributed numbers between 0 and 1.
  *  <p>
