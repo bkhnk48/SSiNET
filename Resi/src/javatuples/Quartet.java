@@ -29,7 +29,7 @@ import javatuples.valueintf.IValue3;
 
 /**
  * <p>
- * A tuple of four elements.
+ * A tuple of four network.elements.
  * </p> 
  * 
  * @since 1.0
@@ -62,7 +62,7 @@ public final class Quartet<A,B,C,D>
     
     /**
      * <p>
-     * Create tuple from array. Array has to have exactly four elements.
+     * Create tuple from array. Array has to have exactly four network.elements.
      * </p>
      * 
      * @param <X> the array component type 
@@ -74,7 +74,7 @@ public final class Quartet<A,B,C,D>
             throw new IllegalArgumentException("Array cannot be null");
         }
         if (array.length != 4) {
-            throw new IllegalArgumentException("Array must have exactly 4 elements in order to create a Quartet. Size is " + array.length);
+            throw new IllegalArgumentException("Array must have exactly 4 network.elements in order to create a Quartet. Size is " + array.length);
         }
         return new Quartet<X,X,X,X>(array[0],array[1],array[2],array[3]);
     }
@@ -82,7 +82,7 @@ public final class Quartet<A,B,C,D>
     
     /**
      * <p>
-     * Create tuple from collection. Collection has to have exactly four elements.
+     * Create tuple from collection. Collection has to have exactly four network.elements.
      * </p>
      * 
      * @param <X> the collection component type 
@@ -98,7 +98,7 @@ public final class Quartet<A,B,C,D>
     
     /**
      * <p>
-     * Create tuple from iterable. Iterable has to have exactly four elements.
+     * Create tuple from iterable. Iterable has to have exactly four network.elements.
      * </p>
      * 
      * @param <X> the iterable component type 
@@ -114,7 +114,7 @@ public final class Quartet<A,B,C,D>
     /**
      * <p>
      * Create tuple from iterable, starting from the specified index. Iterable
-     * can have more (or less) elements than the tuple to be created.
+     * can have more (or less) network.elements than the tuple to be created.
      * </p>
      * 
      * @param <X> the iterable component type 
@@ -178,11 +178,11 @@ public final class Quartet<A,B,C,D>
         }
         
         if (tooFewElements && exactSize) {
-            throw new IllegalArgumentException("Not enough elements for creating a Quartet (4 needed)");
+            throw new IllegalArgumentException("Not enough network.elements for creating a Quartet (4 needed)");
         }
         
         if (iter.hasNext() && exactSize) {
-            throw new IllegalArgumentException("Iterable must have exactly 4 available elements in order to create a Quartet.");
+            throw new IllegalArgumentException("Iterable must have exactly 4 available network.elements in order to create a Quartet.");
         }
         
         return new Quartet<X,X,X,X>(element0, element1, element2, element3);
