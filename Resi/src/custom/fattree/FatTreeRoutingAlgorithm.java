@@ -4,8 +4,6 @@ package custom.fattree;
 //import kotlin.Triple;
 //import kotlin.TuplesKt;
 import javatuples.* ;
-import network.Topology;
-import network.Node;
 
 
 import routing.RoutingAlgorithm;
