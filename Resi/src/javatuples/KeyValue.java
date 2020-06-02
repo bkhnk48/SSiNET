@@ -27,7 +27,7 @@ import javatuples.valueintf.IValueValue;
 
 /**
  * <p>
- * A tuple of two elements, with positions 0 and 1 renamed as "key" and 
+ * A tuple of two network.elements, with positions 0 and 1 renamed as "key" and
  * "value", respectively.
  * </p> 
  * 
@@ -57,7 +57,7 @@ public final class KeyValue<A,B>
     
     /**
      * <p>
-     * Create tuple from array. Array has to have exactly two elements.
+     * Create tuple from array. Array has to have exactly two network.elements.
      * </p>
      * 
      * @param <X> the array component type 
@@ -69,7 +69,7 @@ public final class KeyValue<A,B>
             throw new IllegalArgumentException("Array cannot be null");
         }
         if (array.length != 2) {
-            throw new IllegalArgumentException("Array must have exactly 2 elements in order to create a KeyValue. Size is " + array.length);
+            throw new IllegalArgumentException("Array must have exactly 2 network.elements in order to create a KeyValue. Size is " + array.length);
         }
         return new KeyValue<X,X>(array[0],array[1]);
     }
@@ -129,11 +129,11 @@ public final class KeyValue<A,B>
         }
         
         if (tooFewElements && exactSize) {
-            throw new IllegalArgumentException("Not enough elements for creating a KeyValue (2 needed)");
+            throw new IllegalArgumentException("Not enough network.elements for creating a KeyValue (2 needed)");
         }
         
         if (iter.hasNext() && exactSize) {
-            throw new IllegalArgumentException("Iterable must have exactly 2 available elements in order to create a KeyValue.");
+            throw new IllegalArgumentException("Iterable must have exactly 2 available network.elements in order to create a KeyValue.");
         }
         
         return new KeyValue<X,X>(element0, element1);
