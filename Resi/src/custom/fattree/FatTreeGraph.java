@@ -33,6 +33,7 @@ public class FatTreeGraph extends Graph {
 
         this.V = numServers + numPodSwitches + numCores;
         this.E = 0;
+
         adj = (List<Integer>[]) new List[V];
         for (int v = 0; v < V; v++) {
             adj[v] = new ArrayList<Integer>();
@@ -121,6 +122,7 @@ public class FatTreeGraph extends Graph {
     @Override
     public List<Integer> hosts() {
         if (hosts != null) return hosts;
+
         hosts = new ArrayList<>();
 
         int numEachPod = k * k / 4 + k;
@@ -142,6 +144,7 @@ public class FatTreeGraph extends Graph {
         if (switches != null) return switches;
         switches = new ArrayList<>();
 
+        // add pod's switches
         int numEachPod = k * k / 4 + k;
         for (int p = 0; p < k; p++) {
             int offset = numEachPod * p;
@@ -151,7 +154,7 @@ public class FatTreeGraph extends Graph {
             }
         }
 
-        // address for core switches
+        // add core switches
         for (int j = 1; j <= k / 2; j++) {
             for (int i = 1; i <= k / 2; i++) {
                 int offset = numPodSwitches + numServers;
