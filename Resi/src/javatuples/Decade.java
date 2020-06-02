@@ -35,7 +35,7 @@ import javatuples.valueintf.IValue9;
 
 /**
  * <p>
- * A tuple of ten elements.
+ * A tuple of ten network.elements.
  * </p> 
  * 
  * @since 1.0
@@ -79,7 +79,7 @@ public final class Decade<A,B,C,D,E,F,G,H,I,J>
     
     /**
      * <p>
-     * Create tuple from array. Array has to have exactly ten elements.
+     * Create tuple from array. Array has to have exactly ten network.elements.
      * </p>
      * 
      * @param <X> the array component type 
@@ -91,7 +91,7 @@ public final class Decade<A,B,C,D,E,F,G,H,I,J>
             throw new IllegalArgumentException("Array cannot be null");
         }
         if (array.length != 10) {
-            throw new IllegalArgumentException("Array must have exactly 10 elements in order to create a Decade. Size is " + array.length);
+            throw new IllegalArgumentException("Array must have exactly 10 network.elements in order to create a Decade. Size is " + array.length);
         }
         return new Decade<X,X,X,X,X,X,X,X,X,X>(
                 array[0],array[1],array[2],array[3],array[4],
@@ -101,7 +101,7 @@ public final class Decade<A,B,C,D,E,F,G,H,I,J>
     
     /**
      * <p>
-     * Create tuple from collection. Collection has to have exactly ten elements.
+     * Create tuple from collection. Collection has to have exactly ten network.elements.
      * </p>
      * 
      * @param <X> the collection component type 
@@ -116,7 +116,7 @@ public final class Decade<A,B,C,D,E,F,G,H,I,J>
     
     /**
      * <p>
-     * Create tuple from iterable. Iterable has to have exactly ten elements.
+     * Create tuple from iterable. Iterable has to have exactly ten network.elements.
      * </p>
      * 
      * @param <X> the iterable component type 
@@ -132,7 +132,7 @@ public final class Decade<A,B,C,D,E,F,G,H,I,J>
     /**
      * <p>
      * Create tuple from iterable, starting from the specified index. Iterable
-     * can have more (or less) elements than the tuple to be created.
+     * can have more (or less) network.elements than the tuple to be created.
      * </p>
      * 
      * @param <X> the iterable component type 
@@ -237,11 +237,11 @@ public final class Decade<A,B,C,D,E,F,G,H,I,J>
         }
         
         if (tooFewElements && exactSize) {
-            throw new IllegalArgumentException("Not enough elements for creating a Decade (10 needed)");
+            throw new IllegalArgumentException("Not enough network.elements for creating a Decade (10 needed)");
         }
         
         if (iter.hasNext() && exactSize) {
-            throw new IllegalArgumentException("Iterable must have exactly 10 available elements in order to create a Decade.");
+            throw new IllegalArgumentException("Iterable must have exactly 10 available network.elements in order to create a Decade.");
         }
         
         return new Decade<X,X,X,X,X,X,X,X,X,X>(
