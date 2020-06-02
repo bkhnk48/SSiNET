@@ -2,18 +2,15 @@ package simulator;
 
 import java.util.ArrayList;
 
-import events.Event;
-import network.Device;
-import network.Switch;
+import infrastructure.event.Event;
 import network.Topology;
-import network.host.Host;
 
 public abstract class Simulator {
 	protected long currentTime = 0;
     protected boolean stopped = true;
     protected boolean simulating = false;
     
-    public Topology network;
+    public Topology topology;
     
     public ArrayList<Event> currentEvents = new ArrayList<Event>();
     
