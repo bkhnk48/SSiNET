@@ -1,27 +1,46 @@
 package network.layers;
 
-import elements.*;
-import network.Device;
-import network.host.*;
+import infrastructure.entity.Node;
+import network.elements.*;
+import infrastructure.entity.Device;
+import network.entities.*;
+import simulator.DiscreteEventSimulator;
 import simulator.Simulator;
 
-public class PhysicalLayer {
-	public ExitBuffer[] EXBs;
-	public EntranceBuffer[] ENBs;
-	public SourceQueue sq;
-	public Simulator sim;
-	public Device node;
-	
-	public PhysicalLayer(Host host)
+import java.util.HashMap;
+
+public class PhysicalLayer { //only transfers packets from a node to links,
+
+	public HashMap<Integer, ExitBuffer> exitBuffers;
+	public HashMap<Integer, EntranceBuffer> entranceBuffers;
+	public SourceQueue sourceQueue;
+	public HashMap<Integer, Link> links; // rieng link host luu id la id cua host
+	public DiscreteEventSimulator simulator;
+	public Node node;
+
+	public PhysicalLayer(SourceNode host)
 	{
-		ENBs = null;
-		EXBs = new ExitBuffer[1];
-		sq = new SourceQueue(host.id);
-		EXBs[0] = new ExitBuffer();
-		EXBs[0].phyLayer = this;
-		sq.phyLayer = this;
+		entranceBuffers = null;
+		exitBuffers = new HashMap<>();
+		sourceQueue = new SourceQueue(host.getId());
+		sourceQueue.physicalLayer = this;
 		this.node = host;
+		this.links = new HashMap<>();
 	}
+	public PhysicalLayer(DestinationNode host)
+	{
+		this.node = host;
+		this.links = new HashMap<>();
+	}
+
+	public PhysicalLayer(Switch sw, int k)
+	{
+		entranceBuffers = new HashMap<>();
+		exitBuffers = new HashMap<>();
+		this.node = sw;
+		this.links = new HashMap<>();
+	}
+
 	
 	/*public void addLocationOfEvents()
 	{
