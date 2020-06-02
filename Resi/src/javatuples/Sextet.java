@@ -31,7 +31,7 @@ import javatuples.valueintf.IValue5;
 
 /**
  * <p>
- * A tuple of six elements.
+ * A tuple of six network.elements.
  * </p> 
  * 
  * @since 1.0
@@ -68,7 +68,7 @@ public final class Sextet<A,B,C,D,E,F>
     
     /**
      * <p>
-     * Create tuple from array. Array has to have exactly six elements.
+     * Create tuple from array. Array has to have exactly six network.elements.
      * </p>
      * 
      * @param <X> the array component type 
@@ -80,7 +80,7 @@ public final class Sextet<A,B,C,D,E,F>
             throw new IllegalArgumentException("Array cannot be null");
         }
         if (array.length != 6) {
-            throw new IllegalArgumentException("Array must have exactly 6 elements in order to create a Sextet. Size is " + array.length);
+            throw new IllegalArgumentException("Array must have exactly 6 network.elements in order to create a Sextet. Size is " + array.length);
         }
         return new Sextet<X,X,X,X,X,X>(
                 array[0],array[1],array[2],array[3],array[4],
@@ -90,7 +90,7 @@ public final class Sextet<A,B,C,D,E,F>
     
     /**
      * <p>
-     * Create tuple from collection. Collection has to have exactly six elements.
+     * Create tuple from collection. Collection has to have exactly six network.elements.
      * </p>
      * 
      * @param <X> the collection component type 
@@ -105,7 +105,7 @@ public final class Sextet<A,B,C,D,E,F>
     
     /**
      * <p>
-     * Create tuple from iterable. Iterable has to have exactly six elements.
+     * Create tuple from iterable. Iterable has to have exactly six network.elements.
      * </p>
      * 
      * @param <X> the iterable component type 
@@ -121,7 +121,7 @@ public final class Sextet<A,B,C,D,E,F>
     /**
      * <p>
      * Create tuple from iterable, starting from the specified index. Iterable
-     * can have more (or less) elements than the tuple to be created.
+     * can have more (or less) network.elements than the tuple to be created.
      * </p>
      * 
      * @param <X> the iterable component type 
@@ -199,11 +199,11 @@ public final class Sextet<A,B,C,D,E,F>
         }
         
         if (tooFewElements && exactSize) {
-            throw new IllegalArgumentException("Not enough elements for creating a Sextet (6 needed)");
+            throw new IllegalArgumentException("Not enough network.elements for creating a Sextet (6 needed)");
         }
         
         if (iter.hasNext() && exactSize) {
-            throw new IllegalArgumentException("Iterable must have exactly 6 available elements in order to create a Sextet.");
+            throw new IllegalArgumentException("Iterable must have exactly 6 available network.elements in order to create a Sextet.");
         }
         
         return new Sextet<X,X,X,X,X,X>(
