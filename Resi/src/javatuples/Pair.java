@@ -27,7 +27,7 @@ import javatuples.valueintf.IValue1;
 
 /**
  * <p>
- * A tuple of two elements.
+ * A tuple of two network.elements.
  * </p> 
  * 
  * @since 1.0
@@ -56,7 +56,7 @@ public final class Pair<A,B>
     
     /**
      * <p>
-     * Create tuple from array. Array has to have exactly two elements.
+     * Create tuple from array. Array has to have exactly two network.elements.
      * </p>
      * 
      * @param <X> the array component type 
@@ -68,7 +68,7 @@ public final class Pair<A,B>
             throw new IllegalArgumentException("Array cannot be null");
         }
         if (array.length != 2) {
-            throw new IllegalArgumentException("Array must have exactly 2 elements in order to create a Pair. Size is " + array.length);
+            throw new IllegalArgumentException("Array must have exactly 2 network.elements in order to create a Pair. Size is " + array.length);
         }
         return new Pair<X,X>(array[0],array[1]);
     }
@@ -76,7 +76,7 @@ public final class Pair<A,B>
     
     /**
      * <p>
-     * Create tuple from collection. Collection has to have exactly two elements.
+     * Create tuple from collection. Collection has to have exactly two network.elements.
      * </p>
      * 
      * @param <X> the collection component type 
@@ -91,7 +91,7 @@ public final class Pair<A,B>
     
     /**
      * <p>
-     * Create tuple from iterable. Iterable has to have exactly two elements.
+     * Create tuple from iterable. Iterable has to have exactly two network.elements.
      * </p>
      * 
      * @param <X> the iterable component type 
@@ -107,7 +107,7 @@ public final class Pair<A,B>
     /**
      * <p>
      * Create tuple from iterable, starting from the specified index. Iterable
-     * can have more (or less) elements than the tuple to be created.
+     * can have more (or less) network.elements than the tuple to be created.
      * </p>
      * 
      * @param <X> the iterable component type 
@@ -158,11 +158,11 @@ public final class Pair<A,B>
         }
         
         if (tooFewElements && exactSize) {
-            throw new IllegalArgumentException("Not enough elements for creating a Pair (2 needed)");
+            throw new IllegalArgumentException("Not enough network.elements for creating a Pair (2 needed)");
         }
         
         if (iter.hasNext() && exactSize) {
-            throw new IllegalArgumentException("Iterable must have exactly 2 available elements in order to create a Pair.");
+            throw new IllegalArgumentException("Iterable must have exactly 2 available network.elements in order to create a Pair.");
         }
         
         return new Pair<X,X>(element0, element1);
