@@ -110,7 +110,7 @@ public final class Unit<A>
     /**
      * <p>
      * Create tuple from iterable, starting from the specified index. Iterable
-     * can have more (or less) elements than the tuple to be created.
+     * can have more (or less) network.elements than the tuple to be created.
      * </p>
      * 
      * @param <X> the iterable component type 
@@ -154,7 +154,7 @@ public final class Unit<A>
         }
         
         if (tooFewElements && exactSize) {
-            throw new IllegalArgumentException("Not enough elements for creating a Unit (1 needed)");
+            throw new IllegalArgumentException("Not enough network.elements for creating a Unit (1 needed)");
         }
         
         if (iter.hasNext() && exactSize) {
