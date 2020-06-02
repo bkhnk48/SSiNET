@@ -34,7 +34,7 @@ import javatuples.valueintf.IValue8;
 
 /**
  * <p>
- * A tuple of nine elements.
+ * A tuple of nine network.elements.
  * </p> 
  * 
  * @since 1.0
@@ -77,7 +77,7 @@ public final class Ennead<A,B,C,D,E,F,G,H,I>
     
     /**
      * <p>
-     * Create tuple from array. Array has to have exactly nine elements.
+     * Create tuple from array. Array has to have exactly nine network.elements.
      * </p>
      * 
      * @param <X> the array component type 
@@ -89,7 +89,7 @@ public final class Ennead<A,B,C,D,E,F,G,H,I>
             throw new IllegalArgumentException("Array cannot be null");
         }
         if (array.length != 9) {
-            throw new IllegalArgumentException("Array must have exactly 9 elements in order to create an Ennead. Size is " + array.length);
+            throw new IllegalArgumentException("Array must have exactly 9 network.elements in order to create an Ennead. Size is " + array.length);
         }
         return new Ennead<X,X,X,X,X,X,X,X,X>(
                 array[0],array[1],array[2],array[3],array[4],
@@ -99,7 +99,7 @@ public final class Ennead<A,B,C,D,E,F,G,H,I>
     
     /**
      * <p>
-     * Create tuple from collection. Collection has to have exactly nine elements.
+     * Create tuple from collection. Collection has to have exactly nine network.elements.
      * </p>
      * 
      * @param <X> the collection component type 
@@ -114,7 +114,7 @@ public final class Ennead<A,B,C,D,E,F,G,H,I>
 
     /**
      * <p>
-     * Create tuple from iterable. Iterable has to have exactly nine elements.
+     * Create tuple from iterable. Iterable has to have exactly nine network.elements.
      * </p>
      * 
      * @param <X> the iterable component type 
@@ -130,7 +130,7 @@ public final class Ennead<A,B,C,D,E,F,G,H,I>
     /**
      * <p>
      * Create tuple from iterable, starting from the specified index. Iterable
-     * can have more (or less) elements than the tuple to be created.
+     * can have more (or less) network.elements than the tuple to be created.
      * </p>
      * 
      * @param <X> the iterable component type 
@@ -229,11 +229,11 @@ public final class Ennead<A,B,C,D,E,F,G,H,I>
         }
         
         if (tooFewElements && exactSize) {
-            throw new IllegalArgumentException("Not enough elements for creating an Ennead (9 needed)");
+            throw new IllegalArgumentException("Not enough network.elements for creating an Ennead (9 needed)");
         }
         
         if (iter.hasNext() && exactSize) {
-            throw new IllegalArgumentException("Iterable must have exactly 9 available elements in order to create an Ennead.");
+            throw new IllegalArgumentException("Iterable must have exactly 9 available network.elements in order to create an Ennead.");
         }
         
         return new Ennead<X,X,X,X,X,X,X,X,X>(
