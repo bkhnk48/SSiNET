@@ -16,9 +16,10 @@ public class X00 extends State {
 	//�	State X00: EXB is not full and unable to transfer packet (due to the next ENB is full
 	// or this EXB is empty).
 
-    public X00(ExitBuffer exitBuffer){
+    /*public X00(ExitBuffer exitBuffer){
+    	countStateEXB++;
         this.element = exitBuffer;
-    }
+    }*/
 
     @Override
     // co the lay vao para de biet previous state la gi
