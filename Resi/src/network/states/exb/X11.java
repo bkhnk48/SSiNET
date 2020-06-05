@@ -15,6 +15,7 @@ public class X11 extends State {
 
     public X11(ExitBuffer exitBuffer){
         this.element = exitBuffer;
+        countStateEXB++;
     }
 
     @Override
