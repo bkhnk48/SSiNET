@@ -4,7 +4,7 @@ package network.elements;
 import config.Constant;
 import infrastructure.element.Element;
 import network.layers.DataLinkLayer;
-import network.states.packet.StateP1;
+//import network.states.packet.StateP1;
 
 import java.util.List;
 
