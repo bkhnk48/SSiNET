@@ -4,7 +4,6 @@ import custom.fattree.FatTreeRoutingAlgorithm;
 import infrastructure.entity.Node;
 import network.elements.EntranceBuffer;
 import network.elements.Packet;
-import network.states.packet.StateP4;
 import routing.RoutingAlgorithm;
 
 /**
