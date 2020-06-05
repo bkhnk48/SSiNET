@@ -10,10 +10,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//import com.sun.java.swing.plaf.windows.TMSchema.State;
+
 import common.StdOut;
 import config.Constant;
 import custom.fattree.FatTreeGraph;
 import custom.fattree.FatTreeRoutingAlgorithm;
+import infrastructure.event.Event;
 import network.Topology;
 import network.entities.DestinationNode;
 import network.entities.Host;
@@ -29,6 +32,10 @@ public class ThroughputExperiment {
     }
 
     public double[][] calThroughput(Map<Integer, Integer> trafficPattern, boolean verbose) {
+    	
+    	long start = System.currentTimeMillis();
+        System.out.println("Start:");
+        
         DiscreteEventSimulator simulator = new DiscreteEventSimulator(true, Constant.MAX_TIME, verbose);
         topology.clear(); // clear all the data, queue, ... in switches, hosts
         topology.setSimulator(simulator);
@@ -69,6 +76,11 @@ public class ThroughputExperiment {
         double alternativeRawThroughput = simulator.numReceived * Constant.PACKET_SIZE / (trafficPattern.size());
         //StdOut.printf("b1: %f\n", alternativeRawThroughput);
         alternativeRawThroughput = alternativeRawThroughput / (nPoint * interval);
+        
+        
+        long end = System.currentTimeMillis();
+        NumberFormat formatter = new DecimalFormat("#0.00000");
+        System.out.print("Execution time is " + formatter.format((end - start) / 1000d) + " seconds");
         
         GraphPanel.createAndShowGui(scores);
 
@@ -120,8 +132,7 @@ public class ThroughputExperiment {
                 
             }
             
-            long start = System.currentTimeMillis();
-            System.out.println("Start:");
+            
 
             experiment.calThroughput(traffic, false);
 
@@ -145,12 +156,23 @@ public class ThroughputExperiment {
                     }
                 }
             }
+            
+            
+            System.out.println("\n# of calling packet state constructors (might be 1.000.000): "
+            		+ infrastructure.state.State.countPacket);
+            System.out.println("\n# of calling ENB state constructors: "
+            		+ infrastructure.state.State.countStateENB);
+            
+            System.out.println("\n# of calling EXB state constructors (might be 800.000): "
+            		+ infrastructure.state.State.countStateEXB);
+
+            System.out.println("\n# of initialization"
+            		+ " of sub events (might be 1.000.000): "
+            		+ Event.countSubEvent);
 
             //System.out.println("Rx Packet: " + rxPacket + " " + (thp / traffic.size()));
             
-            long end = System.currentTimeMillis();
-            NumberFormat formatter = new DecimalFormat("#0.00000");
-            System.out.print("Execution time is " + formatter.format((end - start) / 1000d) + " seconds");
+            
             //Endof ThanhNT
         }
     }
