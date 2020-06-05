@@ -12,13 +12,14 @@ import network.elements.Packet;
 import network.elements.UnidirectionalWay;
 import network.entities.DestinationNode;
 import network.entities.Switch;
-import network.states.packet.StateP3;
+//import network.states.packet.SStateP3;
 import network.states.unidirectionalway.W1;
 
 public class N0 extends State {
 	//�	State N0: ENB is not full.
     public N0(EntranceBuffer entranceBuffer){
         this.element = entranceBuffer;
+        //countStateENB++;
     }
     @Override
     public void act(){
