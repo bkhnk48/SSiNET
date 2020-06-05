@@ -18,6 +18,7 @@ public class X01 extends State {
 
     public X01(ExitBuffer exitBuffer){
         this.element = exitBuffer;
+        countStateEXB++;
     }
 
     @Override
