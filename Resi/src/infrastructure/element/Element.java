@@ -3,6 +3,7 @@ package infrastructure.element;
 import infrastructure.event.Event;
 import infrastructure.state.State;
 import network.elements.Packet;
+import infrastructure.state.*;
 
 import java.util.ArrayList;
 
@@ -23,6 +24,13 @@ public abstract class Element {
 	public void setState(State state)
 	{
 		this.state = state;
+	}
+	
+	public void setType(Type type)
+	{
+		if(this.state == null)
+			this.state = new State();
+		this.state.type = type;
 	}
 
 	public void setSoonestEndTime(long soonestEndTime) {
