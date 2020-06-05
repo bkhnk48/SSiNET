@@ -7,6 +7,7 @@ public abstract class Event {
 	protected Packet packet; //packet ID
 	protected long startTime;
 	protected long endTime;
+	public static int countSubEvent = 0;
 
 	protected Element element;
 
