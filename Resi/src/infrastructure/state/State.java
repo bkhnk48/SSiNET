@@ -100,6 +100,8 @@ public class State {
 		            }
 		        }
 				break;
+			default:
+				break;
 		}
 		
 	}
