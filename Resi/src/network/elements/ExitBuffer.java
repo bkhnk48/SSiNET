@@ -3,10 +3,8 @@ package network.elements;
 import config.Constant;
 import infrastructure.element.LimitedBuffer;
 import infrastructure.entity.Node;
-import network.states.exb.X00;
-import network.states.exb.X01;
-import network.states.exb.X10;
-import network.states.exb.X11;
+import infrastructure.state.State;
+import infrastructure.state.Type;
 
 import java.util.ArrayList;
 
@@ -20,7 +18,10 @@ public class ExitBuffer extends LimitedBuffer {
 		this.size = size;
 		this.connectNode = connectNode;
 		this.requestList = new ArrayList<>();
-		this.setState( new X01(this));
+		State s = new State();
+		s.element = this;
+		s.type = Type.X01;
+		this.setState(s);
 	}
 
 	public ArrayList<EntranceBuffer> getRequestList() {
