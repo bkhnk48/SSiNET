@@ -27,6 +27,8 @@ public class DiscreteEventSimulator extends Simulator {
     public long totalHop = 0;
 
 
+    public long timeOfAddCurrentEventsFromDevices = 0;
+    
 
     public DiscreteEventSimulator(boolean isLimit, double timeLimit, boolean verbose) {
         super();
@@ -48,7 +50,7 @@ public class DiscreteEventSimulator extends Simulator {
 		stopped = false;
 		simulating = true;
 		try {
-			long startTime = System.currentTimeMillis();
+			//long startTime = System.currentTimeMillis();//remove redundant variable
 			int lastPercentage = 0;
 			while (!stopped && (!isLimit || currentTime < timeLimit)) {
 				this.currentEvents = new ArrayList<>();
@@ -86,6 +88,8 @@ public class DiscreteEventSimulator extends Simulator {
 
 
     public void addCurrentEventsFromDevices(long currentTime) {
+    	
+    	long startTime = System.currentTimeMillis();
 		// todo chu y kiem tra moi thu extends Element Class
 		List<Host> allHosts = this.topology.getHosts();
 		for (Host host : allHosts) {
@@ -136,7 +140,9 @@ public class DiscreteEventSimulator extends Simulator {
 				}
 			}
 		}
-
+		
+		long end = System.currentTimeMillis();
+		timeOfAddCurrentEventsFromDevices += end-startTime;
 	}
 
     public void addCurrentEventsFromList(ArrayList<Event> allEvents)
