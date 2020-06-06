@@ -82,6 +82,8 @@ public class ThroughputExperiment {
         NumberFormat formatter = new DecimalFormat("#0.00000");
         System.out.print("Execution time is " + formatter.format((end - start) / 1000d) + " seconds");
         
+        System.out.println("\nTime for the method addCurrentEventsFromDevices is: "
+                            + formatter.format(simulator.timeOfAddCurrentEventsFromDevices/1000d) + " secs");
         GraphPanel.createAndShowGui(scores);
 
         if(false)
