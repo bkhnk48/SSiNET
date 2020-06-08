@@ -39,6 +39,8 @@ public class ThroughputExperiment {
         DiscreteEventSimulator simulator = new DiscreteEventSimulator(true, Constant.MAX_TIME, verbose);
         topology.clear(); // clear all the data, queue, ... in switches, hosts
         topology.setSimulator(simulator);
+        
+        simulator.initializeCollectionOfEvents();
 
         int count = 0;
         for (Integer source : trafficPattern.keySet()) {
@@ -84,6 +86,10 @@ public class ThroughputExperiment {
         
         System.out.println("\nTime for the method addCurrentEventsFromDevices is: "
                             + formatter.format(simulator.timeOfAddCurrentEventsFromDevices/1000d) + " secs");
+        
+        System.out.println("\nTime for the method selectNextCurrentTime is: "
+                + formatter.format(simulator.timeOfSelectNextCurrentTime/1000d) + " secs");
+
         GraphPanel.createAndShowGui(scores);
 
         if(false)
