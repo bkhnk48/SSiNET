@@ -36,13 +36,16 @@ public class Sq1 extends State {
 	//Kiem tra xem Source Queue da co event tao goi tin moi chua khi ma da co P moi duoc tao ra(source het delay)
 	{
 		long nextPacketTime = (long)sourceQueue.getNextPacketTime();
-		for(int i = 0; i < sourceQueue.allEvents.size(); i++)
+		for(int i = 0; i < sourceQueue.sim.allEvents.size(); i++)
 		{
-			if(sourceQueue.allEvents.get(i) instanceof AGenerationEvent)
+			if(sourceQueue.sim.allEvents.get(i) instanceof AGenerationEvent)
 			{
-				// dau == vi neu cho them lon hon thi evevt A xay ra nhung se ko co goi tin duoc tao moi, ly do xem trong ham SourceQueue.generatePacket()
+				// dau == vi neu cho them lon hon thi evevt A xay ra nhung se ko co goi tin 
+				//duoc tao moi, ly do xem trong ham SourceQueue.generatePacket()
 //				  neu thoi gian tao packet tiep theo bang thoi gian bat dau event
-				if(sourceQueue.allEvents.get(i).getStartTime() == nextPacketTime)
+				if(sourceQueue.sim.allEvents.get(i).getStartTime() == nextPacketTime
+						&& sourceQueue == sourceQueue.sim.allEvents.get(i).getElement()
+						)
 				{
 					return false;
 				}
