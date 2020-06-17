@@ -72,6 +72,8 @@ public class Topology {
         }
 
         destinationNodes.addAll(Arrays.asList(hostIDList).subList(hostIDList.length / 2, hostIDList.length));
+        
+        
         for (int destinationNodeID : destinationNodes) {
             DestinationNode destinationNode = new DestinationNode(destinationNodeID);
             hosts.add(destinationNode);
