@@ -34,7 +34,7 @@ public class NetworkLayer {
 				}
 			}
 			if(selectedENB != null) {
-				long time = selectedENB.physicalLayer.simulator.time();
+				long time = (long)selectedENB.physicalLayer.simulator.time();
 				Event event = new EMovingInSwitchEvent(time, time + Constant.SWITCH_CYCLE,
 						selectedENB, selectedENB.getPeekPacket());
 				selectedENB.insertEvents(event); //chen them su kien moi vao
