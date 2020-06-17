@@ -20,7 +20,7 @@ public class SourceNode extends Host {
         else
             this.physicalLayer.sourceQueue.setDestinationID(destination);
 
-        long time = this.physicalLayer.simulator.time();
+        long time = (long)this.physicalLayer.simulator.time();
         Event ev = new AGenerationEvent(time, time, this.physicalLayer.sourceQueue);
         this.physicalLayer.sourceQueue.insertEvents(ev);
     }
