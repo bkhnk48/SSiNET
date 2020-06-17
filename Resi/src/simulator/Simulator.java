@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import infrastructure.event.Event;
 import network.Topology;
 
-public abstract class Simulator {
+public abstract class Simulator extends umontreal.ssj.simevents.Simulator{
 	protected long currentTime = 0;
     protected boolean stopped = true;
     protected boolean simulating = false;
@@ -14,7 +14,7 @@ public abstract class Simulator {
     
     public ArrayList<Event> currentEvents = new ArrayList<Event>();
     
-    public long time() {
+    public double time() {
         return this.currentTime;
     }
 
