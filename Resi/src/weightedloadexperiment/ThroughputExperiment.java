@@ -84,11 +84,7 @@ public class ThroughputExperiment {
         NumberFormat formatter = new DecimalFormat("#0.00000");
         System.out.print("Execution time is " + formatter.format((end - start) / 1000d) + " seconds");
         
-        System.out.println("\nTime for the method addCurrentEventsFromDevices is: "
-                            + formatter.format(simulator.timeOfAddCurrentEventsFromDevices/1000d) + " secs");
         
-        System.out.println("\nTime for the method selectNextCurrentTime is: "
-                + formatter.format(simulator.timeOfSelectNextCurrentTime/1000d) + " secs");
 
         GraphPanel.createAndShowGui(scores);
 
@@ -119,7 +115,7 @@ public class ThroughputExperiment {
 
         //for(int timeOfRun = 0; timeOfRun < 100-3; timeOfRun++)
         {
-            FatTreeGraph G = new FatTreeGraph(4);
+            FatTreeGraph G = new FatTreeGraph(16);
             FatTreeRoutingAlgorithm ra = new FatTreeRoutingAlgorithm(G, false);
 
             Topology topology = new Topology(G, ra);
@@ -166,19 +162,7 @@ public class ThroughputExperiment {
             }
             
             
-            System.out.println("\n# of calling packet state constructors (might be 1.000.000): "
-            		+ infrastructure.state.State.countPacket);
-            System.out.println("\n# of calling ENB state constructors: "
-            		+ infrastructure.state.State.countStateENB);
             
-            System.out.println("\n# of calling EXB state constructors (might be 800.000): "
-            		+ infrastructure.state.State.countStateEXB);
-
-            System.out.println("\n# of initialization"
-            		+ " of sub events (might be 1.000.000): "
-            		+ Event.countSubEvent);
-
-            //System.out.println("Rx Packet: " + rxPacket + " " + (thp / traffic.size()));
             
             
             //Endof ThanhNT
