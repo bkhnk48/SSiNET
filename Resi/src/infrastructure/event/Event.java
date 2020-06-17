@@ -3,7 +3,7 @@ package infrastructure.event;
 import infrastructure.element.Element;
 import network.elements.Packet;
 
-public abstract class Event {
+public abstract class Event extends umontreal.ssj.simevents.Event{
 	protected Packet packet; //packet ID
 	protected long startTime;
 	protected long endTime;
