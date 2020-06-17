@@ -33,7 +33,7 @@ public class State {
 		            Packet packet = sourceQueue.getPeekPacket();
 		            if(packet != null){
 		                if(!sourceQueue.hasEventOfPacket(packet)) {
-		                    long time = sourceQueue.physicalLayer.simulator.time();
+		                	long time = (long)sourceQueue.physicalLayer.simulator.time();
 		                    Event event = new BLeavingSourceQueueEvent(time, time, sourceQueue, packet);
 		                    sourceQueue.insertEvents(event); //chen them su kien moi vao
 		                }
@@ -53,7 +53,7 @@ public class State {
 		            Packet packet = sourceQueue.getPeekPacket();
 		            if(packet != null){
 		                if(!sourceQueue.hasEventOfPacket(packet)) {
-		                    long time = sourceQueue.physicalLayer.simulator.time();
+		                	long time = (long)sourceQueue.physicalLayer.simulator.time();
 		                    Event event = new BLeavingSourceQueueEvent(time, time, sourceQueue, packet);
 		                    sourceQueue.insertEvents(event); //chen them su kien moi vao
 		                }
@@ -69,12 +69,12 @@ public class State {
 		        if(packet != null){
 		            if(!(exitBuffer1.hasEventOfPacket(packet))){
 		                if(exitBuffer1.getNode() instanceof SourceNode){
-		                    long time = exitBuffer1.physicalLayer.simulator.time();
+		                	long time = (long)exitBuffer1.physicalLayer.simulator.time();
 		                    Event event = new CLeavingEXBEvent(time, time, exitBuffer1, packet);
 		                    exitBuffer1.insertEvents(event); //chen them su kien moi vao
 		                }
 		                else if(exitBuffer1.getNode() instanceof Switch){
-		                    long time = exitBuffer1.physicalLayer.simulator.time();
+		                	long time = (long)exitBuffer1.physicalLayer.simulator.time();
 		                    Event event = new FLeavingSwitchEvent(time, time + Constant.SWITCH_CYCLE, exitBuffer1, packet);
 		                    exitBuffer1.insertEvents(event); //chen them su kien moi vao
 		                }
@@ -88,12 +88,12 @@ public class State {
 		            if(!(exitBuffer2.hasEventOfPacket(packet2))){
 		                //todo xem neu can viet ham set trang thai co packet ve dung P2 hoac P5
 		                if(exitBuffer2.getNode() instanceof SourceNode){
-		                    long time = exitBuffer2.physicalLayer.simulator.time();
+		                	long time = (long)exitBuffer2.physicalLayer.simulator.time();
 		                    Event event = new CLeavingEXBEvent(time, time, exitBuffer2, packet2);
 		                    exitBuffer2.insertEvents(event); //chen them su kien moi vao
 		                }
 		                else if(exitBuffer2.getNode() instanceof Switch){
-		                    long time = exitBuffer2.physicalLayer.simulator.time();
+		                	long time = (long)exitBuffer2.physicalLayer.simulator.time();
 		                    Event event = new FLeavingSwitchEvent(time, time + Constant.SWITCH_CYCLE, exitBuffer2, packet2);
 		                    exitBuffer2.insertEvents(event); //chen them su kien moi vao
 		                }
