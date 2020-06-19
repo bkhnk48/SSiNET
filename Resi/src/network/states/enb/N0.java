@@ -26,7 +26,9 @@ public class N0 extends State {
         // add event H
         EntranceBuffer entranceBuffer = (EntranceBuffer)element;
         long time = (long)entranceBuffer.physicalLayer.simulator.time();
-        Event event = new HNotificationEvent(time, time + Constant.CREDIT_DELAY, entranceBuffer);
+        Event event = new HNotificationEvent(
+        		entranceBuffer.physicalLayer.simulator,
+        		time, time + Constant.CREDIT_DELAY, entranceBuffer);
         entranceBuffer.insertEvents(event); //chen them su kien moi vao
 
         UnidirectionalWay unidirectionalWay = entranceBuffer.physicalLayer.links
@@ -38,7 +40,9 @@ public class N0 extends State {
             if (!unidirectionalWay.hasEventOfPacket(packet)) {
                 // add event D
             	time = (long)entranceBuffer.physicalLayer.simulator.time();
-                event = new DReachingENBEvent(time
+                event = new DReachingENBEvent(
+                		entranceBuffer.physicalLayer.simulator,
+                		time
                         , time + unidirectionalWay.getLink().getTotalLatency(packet.getSize())
                         , unidirectionalWay, packet);
                 unidirectionalWay.insertEvents(event); //chen them su kien moi vao
