@@ -24,33 +24,28 @@ public class Sq1 extends State {
 	public void act()
 	{
 		SourceQueue sourceQueue = (SourceQueue) element;
-		if(notYetAddGenerationEvent(sourceQueue))//Kiem tra xem Source Queue da co event tao goi tin moi chua?
+		//if(notYetAddGenerationEvent(sourceQueue))//Kiem tra xem Source Queue da co event tao goi tin moi chua?
 		{
 			long time = (long)sourceQueue.getNextPacketTime();
-			Event event = new AGenerationEvent(time, time, element);
+			Event event = new AGenerationEvent(
+					sourceQueue.physicalLayer.simulator,
+					time, time, element);
 			sourceQueue.insertEvents(event);//ma nguon cu dung pthuc add la khong dung
 		}
 	}
 	
-	public boolean notYetAddGenerationEvent(SourceQueue sourceQueue)
-	//Kiem tra xem Source Queue da co event tao goi tin moi chua khi ma da co P moi duoc tao ra(source het delay)
-	{
-		long nextPacketTime = (long)sourceQueue.getNextPacketTime();
-		for(int i = 0; i < sourceQueue.sim.allEvents.size(); i++)
-		{
-			if(sourceQueue.sim.allEvents.get(i) instanceof AGenerationEvent)
-			{
-				// dau == vi neu cho them lon hon thi evevt A xay ra nhung se ko co goi tin 
-				//duoc tao moi, ly do xem trong ham SourceQueue.generatePacket()
-//				  neu thoi gian tao packet tiep theo bang thoi gian bat dau event
-				if(sourceQueue.sim.allEvents.get(i).getStartTime() == nextPacketTime
-						&& sourceQueue == sourceQueue.sim.allEvents.get(i).getElement()
-						)
-				{
-					return false;
-				}
-			}
-		}
-		return true;
-	}
+	/*
+	 * public boolean notYetAddGenerationEvent(SourceQueue sourceQueue) //Kiem tra
+	 * xem Source Queue da co event tao goi tin moi chua khi ma da co P moi duoc tao
+	 * ra(source het delay) { long nextPacketTime =
+	 * (long)sourceQueue.getNextPacketTime(); for(int i = 0; i <
+	 * sourceQueue.sim.allEvents.size(); i++) { if(sourceQueue.sim.allEvents.get(i)
+	 * instanceof AGenerationEvent) { // dau == vi neu cho them lon hon thi evevt A
+	 * xay ra nhung se ko co goi tin //duoc tao moi, ly do xem trong ham
+	 * SourceQueue.generatePacket() //neu thoi gian tao packet tiep theo bang thoi
+	 * gian bat dau event if(sourceQueue.sim.allEvents.get(i).getStartTime() ==
+	 * nextPacketTime && sourceQueue ==
+	 * sourceQueue.sim.allEvents.get(i).getElement() ) { return false; } } } return
+	 * true; }
+	 */
 }
