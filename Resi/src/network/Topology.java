@@ -58,6 +58,8 @@ public class Topology {
 //        hostIDList = new Integer[]{ 17,24,18,11,2,3,19,8,26,0,27,1,10,16,9,25 };
 
         sourceNodes.addAll(Arrays.asList(hostIDList).subList(0, hostIDList.length / 2));
+        //sourceNodes.add(0);
+        
         for (int sourceNodeID : sourceNodes) {
             SourceNode sourceNode = new SourceNode(sourceNodeID);
             sourceNode.physicalLayer = new PhysicalLayer(sourceNode);
@@ -72,7 +74,7 @@ public class Topology {
         }
 
         destinationNodes.addAll(Arrays.asList(hostIDList).subList(hostIDList.length / 2, hostIDList.length));
-        
+        //destinationNodes.add(1);
         
         for (int destinationNodeID : destinationNodes) {
             DestinationNode destinationNode = new DestinationNode(destinationNodeID);
