@@ -2,6 +2,7 @@ package infrastructure.event;
 
 import infrastructure.element.Element;
 import network.elements.Packet;
+import simulator.DiscreteEventSimulator;
 
 public abstract class Event extends umontreal.ssj.simevents.Event{
 	protected Packet packet; //packet ID
@@ -10,6 +11,13 @@ public abstract class Event extends umontreal.ssj.simevents.Event{
 	public static int countSubEvent = 0;
 
 	protected Element element;
+	
+	
+	public Event(DiscreteEventSimulator sim, long time)
+	{
+		super(sim);
+		this.eventTime = (double)time;
+	}
 
 	public Packet getPacket()
 	{
@@ -44,6 +52,5 @@ public abstract class Event extends umontreal.ssj.simevents.Event{
 		this.element = element;
 	}
 
-	public void execute()
-	{}
+
 }
