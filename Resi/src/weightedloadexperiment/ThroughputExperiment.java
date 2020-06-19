@@ -115,18 +115,31 @@ public class ThroughputExperiment {
 
         //for(int timeOfRun = 0; timeOfRun < 100-3; timeOfRun++)
         {
-            FatTreeGraph G = new FatTreeGraph(16);
+            FatTreeGraph G = new FatTreeGraph(30);
             FatTreeRoutingAlgorithm ra = new FatTreeRoutingAlgorithm(G, false);
 
             Topology topology = new Topology(G, ra);
             
 
             ThroughputExperiment experiment = new ThroughputExperiment(topology);
+            //Integer[] hosts = G.hosts().toArray(new Integer[0]);
 
             Map<Integer, Integer> traffic = new HashMap<>();
 
-            List<Integer> sourceNodeIDs = topology.getSourceNodeIDs();
-            List<Integer> destinationNodeIDs = topology.getDestinationNodeIDs();
+            List<Integer> sourceNodeIDs 
+            								//= new ArrayList<>();  
+            								= topology.getSourceNodeIDs();
+            List<Integer> destinationNodeIDs //= new ArrayList<>(); 
+            								= topology.getDestinationNodeIDs();
+            /*PairGenerator pairGenerator = new StrideIndex(hosts, 1);
+            								//new StaggeredProb(hosts, 4, 1, 0);
+            								//new InterPodIncoming(hosts, k, ra, G);
+
+			pairGenerator.pairHosts();
+			pairGenerator.checkValid();
+			
+			sourceNodeIDs = pairGenerator.getSources();
+			destinationNodeIDs = pairGenerator.getDestinations();*/
 
             int sizeOfFlow = //1;
                     sourceNodeIDs.size();
