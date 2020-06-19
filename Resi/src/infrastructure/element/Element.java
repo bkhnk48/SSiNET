@@ -56,16 +56,16 @@ public abstract class Element {
 	public boolean hasEventOfPacket(Packet packet)
 	{
 		if(sim == null) return false;
-		if(sim.allEvents == null) return false;
-		if(sim.allEvents.isEmpty()) return false;
+		//if(sim.allEvents == null) return false;
+		//if(sim.allEvents.isEmpty()) return false;
 		if(packet == null) return false;
 		else
 		{ 
-			for(Event event : sim.allEvents)
+			/*for(Event event : sim.allEvents)
 			{ 
 				if(event.getPacket() == packet) 
 					return true; 
-			} 
+			}*/ 
 			return false; 
 		}
 		/*
@@ -82,7 +82,8 @@ public abstract class Element {
 	 */
 	public void insertEvents(Event ev)
 	{
-		long endTime = ev.getEndTime();
+		sim.addEvent(ev);
+		/*long endTime = ev.getEndTime();
 		
 		if(sim == null)
 			return;
@@ -100,60 +101,14 @@ public abstract class Element {
 			sim.ongoingExecutionTimes.put(endTime, 0);
 			return;
 		}
-		/*
-		 * for(i = 0; i < sim.allEvents.size(); i++ ) {
-		 * if(sim.allEvents.get(i).getEndTime() > endTime) { break; } }
-		 */
-		//sim.allEvents.add(i, ev);
-		/*
-		 * if(ev instanceof EMovingInSwitchEvent) {
-		 * System.out.println("Event is added?"); }
-		 */
-		sim.insertEvent(ev);
-		updateSoonestEndTime();
-	}
-
-	public void updateSoonestEndTime()
-	{
-		if(sim.allEvents == null) { setSoonestEndTime(Long.MAX_VALUE); return; }
-		if(sim.allEvents.size() == 0) { setSoonestEndTime(Long.MAX_VALUE); return; }
-		  setSoonestEndTime(sim.allEvents.get(0).getEndTime());
-		 
-	}
-
-	public void removeExecutedEvent(Event ev)
-	{
-		int index = 0; //sim.allEvents.indexOf(ev);
-		try {
-			//int[] minMax = sim.getMinMaxIndex(ev.getEndTime());
-			
-			//for(index = minMax[0]; index < minMax[1]; index++)
-			/*int max = sim.allEvents.size();
-			for(index = 0; index < max; index++)
-			{
-				if(ev == sim.allEvents.get(index))
-				{
-					break;
-				}
-			}*/
-			
-			sim.allEvents.remove(index);
-			sim.removeOneElement(ev.getEndTime());
-			
-			/*
-			 * for(int i = index; i < sim.allEvents.size() -1 ; i++) { sim.allEvents.set(i,
-			 * sim.allEvents.get(i+1)); } sim.allEvents.remove(sim.allEvents.size() -1);
-			 */
-			if (sim.allEvents.isEmpty())
-				setSoonestEndTime(Long.MAX_VALUE);
-			else setSoonestEndTime(sim.allEvents.get(0).getEndTime());
-		}
-		catch(Exception e)
-		{
-			System.out.println("index = " + index + " ev: " + ev.toString() + " allEvents.size: " + sim.allEvents.size());
-		}
 		
+		sim.insertEvent(ev);
+		updateSoonestEndTime();*/
 	}
+
+	
+
+	
 	
 
 }
