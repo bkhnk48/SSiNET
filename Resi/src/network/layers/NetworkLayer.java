@@ -3,12 +3,12 @@ package network.layers;
 import config.Constant;
 import custom.fattree.FatTreeRoutingAlgorithm;
 import events.EMovingInSwitchEvent;
-import infrastructure.entity.Node;
+
 import infrastructure.event.Event;
 import network.elements.EntranceBuffer;
 import network.elements.ExitBuffer;
 import network.elements.Packet;
-import network.entities.Switch;
+
 
 public class NetworkLayer {
 	protected FatTreeRoutingAlgorithm fatTreeRoutingAlgorithm;
@@ -35,7 +35,9 @@ public class NetworkLayer {
 			}
 			if(selectedENB != null) {
 				long time = (long)selectedENB.physicalLayer.simulator.time();
-				Event event = new EMovingInSwitchEvent(time, time + Constant.SWITCH_CYCLE,
+				Event event = new EMovingInSwitchEvent(
+						selectedENB.physicalLayer.simulator,
+						time, time + Constant.SWITCH_CYCLE,
 						selectedENB, selectedENB.getPeekPacket());
 				selectedENB.insertEvents(event); //chen them su kien moi vao
 			}
