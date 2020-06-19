@@ -33,12 +33,7 @@ public class DiscreteEventSimulator extends Simulator {
     
     public int halfSizeOfEvents = 0;
 
-
     
-    public List<Event> allEvents = new ArrayList<Event>();
-    
-    public HashMap<Long, Integer> ongoingExecutionTimes = new HashMap<Long, Integer>();
-
     public DiscreteEventSimulator(boolean isLimit, double timeLimit, boolean verbose) {
         super();
         this.isLimit = isLimit;
@@ -55,53 +50,36 @@ public class DiscreteEventSimulator extends Simulator {
     public double getTimeLimit() {
         return timeLimit;
     }
-
+    
+    
+    @Override
     public void start () {
+    	
+    	if (eventList.isEmpty())
+            throw new IllegalStateException ("start() called with an empty event list");
+    	
 		stopped = false;
 		simulating = true;
-		
+		umontreal.ssj.simevents.Event ev;
+		int countEvent = 0;
 		
 		try {
-			long startTime = System.currentTimeMillis();//remove redundant variable
+			//long startTime = System.currentTimeMillis();//remove redundant variable
 			int lastPercentage = 0;
-			long previousTime = 0;
-			while (!stopped && (!isLimit || currentTime < timeLimit)) {
+			
+			while ((ev = removeFirstEvent()) != null && !stopped
+                    && (!isLimit || currentTime < timeLimit)) {
 				
-				this.currentEvents = new ArrayList<>();
-				//Loc ra tat ca cac event sap ket thuc o cac thiet bi
-				//addCurrentEventsFromDevices(currentTime);
+				countEvent++;
+				ev.actions();
+	
 				
-				for(Event event: allEvents)
-				{
-					if(event.getEndTime() == currentTime)
-						currentEvents.add(event);
-					else
-						break;
-				}
-				
-				/*
-				 * System.out.println("CurrentEvents.size() " + currentEvents.size() );
-				 */
-				
-				
-				for (Event event : currentEvents) {
-					event.execute();
-				}
-				
-				
-				
-				currentTime = selectNextCurrentTime(currentTime);
-				/*
-				 * if(currentTime > previousTime) { ongoingExecutionTimes.remove(previousTime);
-				 * previousTime = currentTime; }
-				 */
-				
-				int percentage = (int) (currentTime ) / (int) Constant.EXPERIMENT_INTERVAL; 
+				/*int percentage = (int) (currentTime ) / (int) Constant.EXPERIMENT_INTERVAL; 
 				if (percentage > lastPercentage) 
 				{ 
 					lastPercentage = percentage;
 					StdOut.printProgress("Progress", startTime, (long) timeLimit, currentTime); 
-				}
+				}*/
 				
 				 
 			}
@@ -112,7 +90,28 @@ public class DiscreteEventSimulator extends Simulator {
 			stopped = true;
 			simulating = false;
 		}
+		
+		System.out.println("# of Events: " + countEvent);
 	}
+    
+    
+    @Override
+    protected Event removeFirstEvent() {
+        if (this.stopped) {
+            return null;
+        } else {
+            Event ev = (Event) this.eventList.removeFirst();
+            if (ev == null) {
+                return null;
+            } else {
+                this.currentTime = //(long) ev.time();
+                		ev.getEndTime();
+                ev.setEndTime(-10);
+                
+                return ev;
+            }
+        }
+    }
 
     public boolean isVerbose() {
         return verbose;
@@ -122,6 +121,10 @@ public class DiscreteEventSimulator extends Simulator {
         if (this.verbose) {
             StdOut.printf("At %d: %s\n", (long) this.getTime(), message);
         }
+    }
+    
+    public void addEvent(Event e) {
+        this.getEventList().add(e);
     }
 
     public void initializeCollectionOfEvents()
@@ -178,10 +181,10 @@ public class DiscreteEventSimulator extends Simulator {
 
     public long selectNextCurrentTime(long currentTime)
     {
-    	//long start = System.currentTimeMillis();
     	long result = Long.MAX_VALUE;
-    	result = this.allEvents.get(0).getEndTime();
-		
+		/*
+		 * result = this.allEvents.get(0).getEndTime();
+		 */
     	return result;
     }
     
@@ -189,93 +192,43 @@ public class DiscreteEventSimulator extends Simulator {
 
     public void insertEvent(Event ev)
     {
-    	long endTime = ev.getEndTime();
-    	int anchor = allEvents.size();
-    	int i = 0;
-    	boolean found = false;
-    	boolean newButNotBiggest = false;
-    	Long[] keys = new Long[ongoingExecutionTimes.keySet().size()];
-    	ongoingExecutionTimes.keySet().toArray(keys);
-    	Arrays.sort(keys);
-    	while(i < keys.length && !found) 
-    			//&& !newButNotBiggest)
-    	{
-    		if(endTime == keys[i])
-    		{
-    			if(i < keys.length - 1)
-    			{
-    				anchor = ongoingExecutionTimes.get(keys[i + 1]);
-    			}
-    			found = true;
-    			newButNotBiggest = false;
-    		}
-    		else {
-    			if(endTime < keys[i] && !newButNotBiggest)
-    			{
-    				//anchor = (anchor > ongoingExecutionTimes.get(keys[i]) ? ongoingExecutionTimes.get(keys[i]) : anchor);
-    				anchor = ongoingExecutionTimes.get(keys[i]) ;
-    				newButNotBiggest = true;
-    			}
-    		}
-    		i++;
-    	}
-    	if(found || newButNotBiggest)
-    	{
-    		//int value = ongoingExecutionTimes.get(endTime);
-    		//ongoingExecutionTimes.put(endTime, value + 1);
-    		for(int j = 0; j < keys.length; j++)
-    		{
-    			if(keys[j] > endTime)
-    			{
-    				int value = ongoingExecutionTimes.get(keys[j]);
-    				ongoingExecutionTimes.put(keys[j], value + 1);
-    			}
-    		}
-    	} 
-    	else {
-    	//if(!found && !newButNotBiggest){
-    		ongoingExecutionTimes.put(endTime, allEvents.size() );
-    	}
+		/*
+		 * long endTime = ev.getEndTime(); int anchor = allEvents.size(); int i = 0;
+		 * boolean found = false; boolean newButNotBiggest = false; Long[] keys = new
+		 * Long[ongoingExecutionTimes.keySet().size()];
+		 * ongoingExecutionTimes.keySet().toArray(keys); Arrays.sort(keys); while(i <
+		 * keys.length && !found) { if(endTime == keys[i]) { if(i < keys.length - 1) {
+		 * anchor = ongoingExecutionTimes.get(keys[i + 1]); } found = true;
+		 * newButNotBiggest = false; } else { if(endTime < keys[i] && !newButNotBiggest)
+		 * { anchor = ongoingExecutionTimes.get(keys[i]) ; newButNotBiggest = true; } }
+		 * i++; } if(found || newButNotBiggest) {
+		 * 
+		 * for(int j = 0; j < keys.length; j++) { if(keys[j] > endTime) { int value =
+		 * ongoingExecutionTimes.get(keys[j]); ongoingExecutionTimes.put(keys[j], value
+		 * + 1); } } } else {
+		 * 
+		 * ongoingExecutionTimes.put(endTime, allEvents.size() ); }
+		 * 
+		 * if(newButNotBiggest) { ongoingExecutionTimes.put(endTime, anchor ); }
+		 * 
+		 * allEvents.add(anchor, ev);
+		 */
     	
-    	if(newButNotBiggest)
-    	{
-    		ongoingExecutionTimes.put(endTime, anchor );
-    	}
-    	
-    	allEvents.add(anchor, ev);
-    	//return anchor;
     }
 
     
     public void removeOneElement(long endTime)
     {
-    	Long[] keys = new Long[ongoingExecutionTimes.keySet().size()];
-    	ongoingExecutionTimes.keySet().toArray(keys);
-    	Arrays.sort(keys);
-    	int i = 0;
-    	while(i < keys.length)
-    	{
-    		if(endTime <= keys[i])
-    		{
-    			int value = ongoingExecutionTimes.get(keys[i]);
-    			value--;
-    			if(value == 0)
-    			{
-    				if(i > 0)
-    				{
-    					ongoingExecutionTimes.remove(keys[i-1]);
-    				}
-    			}
-    			//else {
-    				
-    				if(value >= 0)
-    				{
-    					ongoingExecutionTimes.put(keys[i], value);
-    				}
-    			//}
-    		}
-    		i++;
-    	}
+		/*
+		 * Long[] keys = new Long[ongoingExecutionTimes.keySet().size()];
+		 * ongoingExecutionTimes.keySet().toArray(keys); Arrays.sort(keys); int i = 0;
+		 * while(i < keys.length) { if(endTime <= keys[i]) { int value =
+		 * ongoingExecutionTimes.get(keys[i]); value--; if(value == 0) { if(i > 0) {
+		 * ongoingExecutionTimes.remove(keys[i-1]); } } if(value >= 0) {
+		 * ongoingExecutionTimes.put(keys[i], value); }
+		 * 
+		 * } i++; }
+		 */
     }
 
 }
