@@ -30,12 +30,16 @@ public class W0 extends State {
 //                Node nextNode = unidirectionalWay.getToNode();
                 if(exitBuffer.getNode() instanceof SourceNode){
                     long time = (long)exitBuffer.physicalLayer.simulator.time();
-                    Event event = new CLeavingEXBEvent(time, time, exitBuffer, packet);
+                    Event event = new CLeavingEXBEvent(
+                    		exitBuffer.physicalLayer.simulator,
+                    		time, time, exitBuffer, packet);
                     exitBuffer.insertEvents(event); //chen them su kien moi vao
                 }
                 else if(exitBuffer.getNode() instanceof Switch){
                 	long time = (long)exitBuffer.physicalLayer.simulator.time();
-                    Event event = new FLeavingSwitchEvent(time, time + Constant.SWITCH_CYCLE, exitBuffer, packet);
+                    Event event = new FLeavingSwitchEvent(
+                    		exitBuffer.physicalLayer.simulator,
+                    		time, time + Constant.SWITCH_CYCLE, exitBuffer, packet);
                     exitBuffer.insertEvents(event); //chen them su kien moi vao
 
                 }
