@@ -51,6 +51,19 @@ public class Topology {
         //Endof ThanhNT 14/10 add new statements to init property
 
         NetworkLayer networkLayer = new NetworkLayer(routingAlgorithm);
+     // khoi tao switch va them vao list
+        for (int sid : graph.switches()) {
+            Switch sw = new Switch(sid);
+            switches.add(sw);
+            switchById.put(sid, sw);
+
+            //ThanhNT 14/10 add new statements to add new ID of switch
+            cordOfNodes.put(sid, "");
+            //Endof ThanhNT 14/10 add new statements to add new ID of switch
+
+            sw.physicalLayer = new PhysicalLayer(sw, graph.getK());
+            sw.networkLayer = networkLayer;
+        }
         
      // link from switch to switch
         Coordination C = new Coordination(graph);
@@ -104,6 +117,7 @@ public class Topology {
         // khoi tao host va dua vao list
         Integer[] hostIDList = graph.hosts().toArray(new Integer[0]);
         pair.setAllHosts(hostIDList);
+        
         pairGenerator.pairHosts();
         pairGenerator.checkValid();
 
@@ -137,7 +151,8 @@ public class Topology {
 
         }
 
-        destinationNodes.addAll(Arrays.asList(hostIDList)//.subList(hostIDList.length / 2, hostIDList.length)
+        destinationNodes.addAll(//Arrays.asList(hostIDList)//.subList(hostIDList.length / 2, hostIDList.length)
+        		destinationNodeIDs
         						);
         //destinationNodes.add(1);
         
@@ -150,7 +165,7 @@ public class Topology {
         	}
         	else {
         		destinationNode = new Host(destinationNodeID);
-        		destinationNode.type = TypeOfHost.Destionation;
+        		destinationNode.type = TypeOfHost.Destination;
         		hosts.add(destinationNode);
         		hostById.put(destinationNodeID, destinationNode);
         		destinationNode.physicalLayer = new PhysicalLayer(destinationNode);
@@ -167,19 +182,7 @@ public class Topology {
             
         }
 
-        // khoi tao switch va them vao list
-        for (int sid : graph.switches()) {
-            Switch sw = new Switch(sid);
-            switches.add(sw);
-            switchById.put(sid, sw);
-
-            //ThanhNT 14/10 add new statements to add new ID of switch
-            cordOfNodes.put(sid, "");
-            //Endof ThanhNT 14/10 add new statements to add new ID of switch
-
-            sw.physicalLayer = new PhysicalLayer(sw, graph.getK());
-            sw.networkLayer = networkLayer;
-        }
+        
 
 
         
