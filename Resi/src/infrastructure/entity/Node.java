@@ -21,4 +21,14 @@ public abstract class Node extends Device {
     {
     	physicalLayer.simulator = sim;
     }
+    
+    public boolean isDestinationNode()
+    {
+    	return false;
+    }
+    
+    public boolean isSourceNode()
+    {
+    	return false;
+    }
 }
