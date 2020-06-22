@@ -36,4 +36,11 @@ public class StrideIndex extends PairGenerator {
         setSources(sources);
         setDestinations(destinations);
     }
+    
+    @Override
+    public void setAllHosts(Integer[] allHosts)
+    {
+    	super.setAllHosts(allHosts);
+    	this.modulo = allHosts.length;
+    }
 }
