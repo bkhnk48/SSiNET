@@ -9,7 +9,7 @@ import infrastructure.state.State;
 import network.elements.ExitBuffer;
 import network.elements.Packet;
 import network.elements.UnidirectionalWay;
-import network.entities.SourceNode;
+import network.entities.Host;
 import network.entities.Switch;
 
 public class W0 extends State {
@@ -27,8 +27,9 @@ public class W0 extends State {
         Packet packet = exitBuffer.getPeekPacket();
         if(packet != null){
             if(!(exitBuffer.hasEventOfPacket(packet))){
-//                Node nextNode = unidirectionalWay.getToNode();
-                if(exitBuffer.getNode() instanceof SourceNode){
+
+                //if(exitBuffer.getNode() instanceof SourceNode){
+            	if(exitBuffer.getNode() instanceof Host){
                     long time = (long)exitBuffer.physicalLayer.simulator.time();
                     Event event = new CLeavingEXBEvent(
                     		exitBuffer.physicalLayer.simulator,
