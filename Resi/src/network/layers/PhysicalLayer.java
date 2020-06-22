@@ -18,20 +18,31 @@ public class PhysicalLayer { //only transfers packets from a node to links,
 	public DiscreteEventSimulator simulator;
 	public Node node;
 
-	public PhysicalLayer(SourceNode host)
+	/*
+	 * public PhysicalLayer(SourceNode host) { entranceBuffers = null; exitBuffers =
+	 * new HashMap<>(); sourceQueue = new SourceQueue(host.getId());
+	 * sourceQueue.physicalLayer = this; this.node = host; this.links = new
+	 * HashMap<>(); } public PhysicalLayer(DestinationNode host) { this.node = host;
+	 * this.links = new HashMap<>(); }
+	 */
+	public PhysicalLayer(Host host)
 	{
-		entranceBuffers = null;
-		exitBuffers = new HashMap<>();
-		sourceQueue = new SourceQueue(host.getId());
-		sourceQueue.physicalLayer = this;
-		this.node = host;
-		this.links = new HashMap<>();
+		if(host.type == TypeOfHost.Source || host.type == TypeOfHost.Mix)
+		{
+			entranceBuffers = null;
+			exitBuffers = new HashMap<>();
+			sourceQueue = new SourceQueue(host.getId());
+			sourceQueue.physicalLayer = this;
+			this.node = host;
+			this.links = new HashMap<>();
+		}
+		if(host.type == TypeOfHost.Destionation || host.type == TypeOfHost.Mix)
+		{
+			this.node = host;
+			this.links = new HashMap<>();
+		}
 	}
-	public PhysicalLayer(DestinationNode host)
-	{
-		this.node = host;
-		this.links = new HashMap<>();
-	}
+	
 
 	public PhysicalLayer(Switch sw, int k)
 	{
