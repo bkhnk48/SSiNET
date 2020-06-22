@@ -1,16 +1,15 @@
 package network.entities;
 
 import events.AGenerationEvent;
-import factories.FactoryPacket;
 import infrastructure.event.Event;
 import network.elements.SourceQueue;
 
 public class SourceNode extends Host {
-    private FactoryPacket factoryPacket;
+   
 
     public SourceNode(int id){
         super(id);
-        factoryPacket = new FactoryPacket(this);
+   
     }
 
     public void generatePacket(int destination)
