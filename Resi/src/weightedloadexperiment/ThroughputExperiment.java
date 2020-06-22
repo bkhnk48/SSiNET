@@ -126,11 +126,10 @@ public class ThroughputExperiment {
 
             Map<Integer, Integer> traffic = new HashMap<>();
 
-            List<Integer> sourceNodeIDs 
-            								//= new ArrayList<>();  
-            								= topology.getSourceNodeIDs();
-            List<Integer> destinationNodeIDs //= new ArrayList<>(); 
-            								= topology.getDestinationNodeIDs();
+            List<Integer> sourceNodeIDs = new ArrayList<>();  
+            							//	= topology.getSourceNodeIDs();
+            List<Integer> destinationNodeIDs = new ArrayList<>(); 
+            								//= topology.getDestinationNodeIDs();
             /*PairGenerator pairGenerator = new StrideIndex(hosts, 1);
             								//new StaggeredProb(hosts, 4, 1, 0);
             								//new InterPodIncoming(hosts, k, ra, G);
