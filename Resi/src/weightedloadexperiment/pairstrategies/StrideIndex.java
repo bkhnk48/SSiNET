@@ -5,6 +5,14 @@ import java.util.List;
 public class StrideIndex extends PairGenerator {
     private int stride;
     private int modulo ;
+    
+    public StrideIndex(int stride)
+    {
+        super();
+        this.stride = stride;
+        
+    }
+    
     public StrideIndex(Integer[] allHosts, int stride)
     {
         super(allHosts);
