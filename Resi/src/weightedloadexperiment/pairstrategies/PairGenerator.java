@@ -15,6 +15,10 @@ public abstract class PairGenerator {
         return allHosts;
     }
 
+    public void setAllHosts(Integer[] allHosts)
+    {
+    	this.allHosts = allHosts;
+    }
     public List<Integer> getSources() {
         return sources;
     }
@@ -33,6 +37,12 @@ public abstract class PairGenerator {
 
     private List<Integer> sources;
     private List<Integer> destinations;
+    
+    public PairGenerator()
+    {
+    	sources = new ArrayList<Integer>();
+        destinations = new ArrayList<Integer>();
+    }
 
     public PairGenerator(Integer[] allHosts)
     {
