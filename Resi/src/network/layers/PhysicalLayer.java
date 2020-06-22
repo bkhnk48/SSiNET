@@ -36,7 +36,7 @@ public class PhysicalLayer { //only transfers packets from a node to links,
 			this.node = host;
 			this.links = new HashMap<>();
 		}
-		if(host.type == TypeOfHost.Destionation || host.type == TypeOfHost.Mix)
+		if(host.type == TypeOfHost.Destination || host.type == TypeOfHost.Mix)
 		{
 			this.node = host;
 			this.links = new HashMap<>();
