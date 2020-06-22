@@ -1,6 +1,6 @@
 package network;
 
-import common.Knuth;
+
 import config.Constant;
 import custom.fattree.FatTreeGraph;
 import custom.fattree.FatTreeRoutingAlgorithm;
@@ -14,6 +14,7 @@ import network.entities.*;
 import network.layers.NetworkLayer;
 import network.layers.PhysicalLayer;
 import simulator.DiscreteEventSimulator;
+import weightedloadexperiment.pairstrategies.PairGenerator;
 
 import java.util.*;
 
@@ -32,8 +33,10 @@ public class Topology {
     //ThanhNT 14/10 new property
     public Map<Integer, String> cordOfNodes;
     //Endof ThanhNT 14/10 new property
+    
+    public PairGenerator pairGenerator;
 
-    public Topology(FatTreeGraph graph, FatTreeRoutingAlgorithm routingAlgorithm) {
+    public Topology(FatTreeGraph graph, FatTreeRoutingAlgorithm routingAlgorithm, PairGenerator pair) {
         this.graph = graph;
         // construct hosts, switches and links and routing algorithm
         hosts = new ArrayList<>();
@@ -93,21 +96,36 @@ public class Topology {
                 }
             }
         }
+        
+        this.pairGenerator = pair;
+        
+                
 
         // khoi tao host va dua vao list
         Integer[] hostIDList = graph.hosts().toArray(new Integer[0]);
+        pair.setAllHosts(hostIDList);
+        pairGenerator.pairHosts();
+        pairGenerator.checkValid();
+
+        List<Integer> sourceNodeIDs = new ArrayList<>();  
+		//	= topology.getSourceNodeIDs();
+        List<Integer> destinationNodeIDs = new ArrayList<>(); 
+			//= topology.getDestinationNodeIDs();
 
 
+        sourceNodeIDs = pairGenerator.getSources();
+        destinationNodeIDs = pairGenerator.getDestinations();
         //Knuth.shuffle(hostIDList);
 
 //        hostIDList = new Integer[]{ 17,24,18,11,2,3,19,8,26,0,27,1,10,16,9,25 };
 
-        sourceNodes.addAll(Arrays.asList(hostIDList)//.subList(0, hostIDList.length / 2)
+        sourceNodes.addAll(sourceNodeIDs//.subList(0, hostIDList.length / 2)
         											);
         //sourceNodes.add(0);
         
         for (int sourceNodeID : sourceNodes) {
-            SourceNode sourceNode = new SourceNode(sourceNodeID);
+            Host sourceNode = new Host(sourceNodeID);
+            sourceNode.type = TypeOfHost.Source;
             sourceNode.physicalLayer = new PhysicalLayer(sourceNode);
             sourceNode.networkLayer = networkLayer;
             hosts.add(sourceNode);
@@ -124,16 +142,29 @@ public class Topology {
         //destinationNodes.add(1);
         
         for (int destinationNodeID : destinationNodes) {
-            DestinationNode destinationNode = new DestinationNode(destinationNodeID);
-            hosts.add(destinationNode);
-            hostById.put(destinationNodeID, destinationNode);
+        	Host destinationNode = null;
+        	if(hostById.containsKey(destinationNodeID))
+        	{
+        		destinationNode = hostById.get(destinationNodeID);
+        		destinationNode.type = TypeOfHost.Mix;
+        	}
+        	else {
+        		destinationNode = new Host(destinationNodeID);
+        		destinationNode.type = TypeOfHost.Destionation;
+        		hosts.add(destinationNode);
+        		hostById.put(destinationNodeID, destinationNode);
+        		destinationNode.physicalLayer = new PhysicalLayer(destinationNode);
+                destinationNode.networkLayer = networkLayer;
+        	}
+        	
+            
+            
 
             //ThanhNT 14/10 add new statements to add new ID of HOST
             cordOfNodes.put(destinationNodeID, "");
             //Endof ThanhNT 14/10 add new statements to add new ID of HOST
 
-            destinationNode.physicalLayer = new PhysicalLayer(destinationNode);
-            destinationNode.networkLayer = networkLayer;
+            
         }
 
         // khoi tao switch va them vao list
@@ -166,7 +197,7 @@ public class Topology {
             sw.physicalLayer.links.put(host.getId(), link);
 
             //initiate property in Physical Layer
-            if(host instanceof SourceNode){
+            if(host.isSourceNode()){
                 //exb of host
                 ExitBuffer exitBuffer = new ExitBuffer(host, sw, Constant.QUEUE_SIZE);
                 exitBuffer.physicalLayer = host.physicalLayer;
@@ -180,7 +211,7 @@ public class Topology {
 
             // tao exitBuffer cho switch noi toi desNode
             //exb of switch to desNode
-            if(host instanceof DestinationNode){
+            if(host.isDestinationNode()){
                 ExitBuffer exitBuffer = new ExitBuffer(sw, host, Constant.QUEUE_SIZE);
                 exitBuffer.physicalLayer = sw.physicalLayer;
                 sw.physicalLayer.exitBuffers.put(host.getId(), exitBuffer);
