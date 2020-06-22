@@ -22,6 +22,8 @@ import network.entities.DestinationNode;
 import network.entities.Host;
 import network.entities.SourceNode;
 import simulator.DiscreteEventSimulator;
+import weightedloadexperiment.pairstrategies.PairGenerator;
+import weightedloadexperiment.pairstrategies.StrideIndex;
 
 
 public class ThroughputExperiment {
@@ -122,7 +124,7 @@ public class ThroughputExperiment {
             
 
             ThroughputExperiment experiment = new ThroughputExperiment(topology);
-            //Integer[] hosts = G.hosts().toArray(new Integer[0]);
+            Integer[] hosts = G.hosts().toArray(new Integer[0]);
 
             Map<Integer, Integer> traffic = new HashMap<>();
 
@@ -130,7 +132,7 @@ public class ThroughputExperiment {
             							//	= topology.getSourceNodeIDs();
             List<Integer> destinationNodeIDs = new ArrayList<>(); 
             								//= topology.getDestinationNodeIDs();
-            /*PairGenerator pairGenerator = new StrideIndex(hosts, 1);
+            PairGenerator pairGenerator = new StrideIndex(hosts, 1);
             								//new StaggeredProb(hosts, 4, 1, 0);
             								//new InterPodIncoming(hosts, k, ra, G);
 
@@ -138,7 +140,7 @@ public class ThroughputExperiment {
 			pairGenerator.checkValid();
 			
 			sourceNodeIDs = pairGenerator.getSources();
-			destinationNodeIDs = pairGenerator.getDestinations();*/
+			destinationNodeIDs = pairGenerator.getDestinations();
 
             int sizeOfFlow = //1;
                     sourceNodeIDs.size();
