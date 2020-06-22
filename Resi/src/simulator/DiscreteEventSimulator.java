@@ -64,7 +64,7 @@ public class DiscreteEventSimulator extends Simulator {
 		int countEvent = 0;
 		
 		try {
-			//long startTime = System.currentTimeMillis();//remove redundant variable
+			long startTime = System.currentTimeMillis();//remove redundant variable
 			int lastPercentage = 0;
 			
 			while ((ev = removeFirstEvent()) != null && !stopped
@@ -74,12 +74,12 @@ public class DiscreteEventSimulator extends Simulator {
 				ev.actions();
 	
 				
-				/*int percentage = (int) (currentTime ) / (int) Constant.EXPERIMENT_INTERVAL; 
+				int percentage = (int) (currentTime ) / (int) Constant.EXPERIMENT_INTERVAL; 
 				if (percentage > lastPercentage) 
 				{ 
 					lastPercentage = percentage;
 					StdOut.printProgress("Progress", startTime, (long) timeLimit, currentTime); 
-				}*/
+				}
 				
 				 
 			}
