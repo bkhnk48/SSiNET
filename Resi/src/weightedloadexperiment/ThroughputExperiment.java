@@ -117,7 +117,7 @@ public class ThroughputExperiment {
 
         //for(int timeOfRun = 0; timeOfRun < 100-3; timeOfRun++)
         {
-            FatTreeGraph G = new FatTreeGraph(30);
+            FatTreeGraph G = new FatTreeGraph(4);
             FatTreeRoutingAlgorithm ra = new FatTreeRoutingAlgorithm(G, false);
 
             Topology topology = new Topology(G, ra);
