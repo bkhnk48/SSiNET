@@ -10,7 +10,7 @@ import infrastructure.state.State;
 import network.elements.EntranceBuffer;
 import network.elements.Packet;
 import network.elements.UnidirectionalWay;
-import network.entities.DestinationNode;
+
 import network.entities.Switch;
 //import network.states.packet.SStateP3;
 import network.states.unidirectionalway.W1;
