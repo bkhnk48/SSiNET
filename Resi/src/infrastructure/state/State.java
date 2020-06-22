@@ -10,7 +10,7 @@ import infrastructure.event.Event;
 import network.elements.ExitBuffer;
 import network.elements.Packet;
 import network.elements.SourceQueue;
-import network.entities.SourceNode;
+import network.entities.Host;
 import network.entities.Switch;
 
 public class State {
@@ -27,8 +27,8 @@ public class State {
 			case X00:
 				ExitBuffer exitBuffer = (ExitBuffer)this.element;
 		        Node currentNode = exitBuffer.getNode();
-		        if(currentNode instanceof SourceNode){
-		            SourceNode sourceNode = (SourceNode)currentNode;
+		        if(currentNode.isSourceNode()){
+		            Host sourceNode = (Host)currentNode;
 		            SourceQueue sourceQueue = sourceNode.physicalLayer.sourceQueue;
 		            Packet packet = sourceQueue.getPeekPacket();
 		            if(packet != null){
@@ -49,8 +49,8 @@ public class State {
 			case X01:
 				ExitBuffer exitBuffer1 = (ExitBuffer)this.element;
 		        Node currentNode1 = exitBuffer1.getNode();
-		        if(currentNode1 instanceof SourceNode){
-		            SourceNode sourceNode = (SourceNode)currentNode1;
+		        if(currentNode1.isSourceNode()){
+		        	Host sourceNode = (Host)currentNode1;
 		            SourceQueue sourceQueue = sourceNode.physicalLayer.sourceQueue;
 		            Packet packet = sourceQueue.getPeekPacket();
 		            if(packet != null){
@@ -72,7 +72,7 @@ public class State {
 		        Packet packet = exitBuffer1.getPeekPacket();
 		        if(packet != null){
 		            if(!(exitBuffer1.hasEventOfPacket(packet))){
-		                if(exitBuffer1.getNode() instanceof SourceNode){
+		                if(exitBuffer1.getNode().isSourceNode()){
 		                	long time = (long)exitBuffer1.physicalLayer.simulator.time();
 		                    Event event = new CLeavingEXBEvent(
 		                    		exitBuffer1.physicalLayer.simulator,
@@ -95,7 +95,7 @@ public class State {
 		        if(packet2 != null){
 		            if(!(exitBuffer2.hasEventOfPacket(packet2))){
 		                //todo xem neu can viet ham set trang thai co packet ve dung P2 hoac P5
-		                if(exitBuffer2.getNode() instanceof SourceNode){
+		                if(exitBuffer2.getNode().isSourceNode()){
 		                	long time = (long)exitBuffer2.physicalLayer.simulator.time();
 		                    Event event = new CLeavingEXBEvent(
 		                    		exitBuffer2.physicalLayer.simulator,
