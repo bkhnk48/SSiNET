@@ -162,7 +162,7 @@ public class ThroughputExperiment {
             double thp = 0, privateThp = 0;
             for (int i = 0; i < topology.getHosts().size(); i++) {
                 Host host = topology.getHosts().get(i);
-                if(host.type == TypeOfHost.Destionation || host.type == TypeOfHost.Mix) {
+                if(host.type == TypeOfHost.Destination || host.type == TypeOfHost.Mix) {
                     Host destinationNode = host;
                     if (destinationNode.getReceivedPacketInNode() != 0) {
                         /*System.out.println("DesNode " + destinationNode.getId() + " receives: "
