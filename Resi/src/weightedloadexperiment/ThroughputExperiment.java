@@ -18,9 +18,10 @@ import custom.fattree.FatTreeGraph;
 import custom.fattree.FatTreeRoutingAlgorithm;
 import infrastructure.event.Event;
 import network.Topology;
-import network.entities.DestinationNode;
+
 import network.entities.Host;
-import network.entities.SourceNode;
+
+import network.entities.TypeOfHost;
 import simulator.DiscreteEventSimulator;
 import weightedloadexperiment.pairstrategies.PairGenerator;
 import weightedloadexperiment.pairstrategies.StrideIndex;
@@ -48,7 +49,7 @@ public class ThroughputExperiment {
         for (Integer source : trafficPattern.keySet()) {
             Integer destination = trafficPattern.get(source);
             count++;
-            ((SourceNode) topology.getHostById(source)).generatePacket(destination);
+            ((Host) topology.getHostById(source)).generatePacket(destination);
         }
         simulator.start();
 
@@ -120,11 +121,18 @@ public class ThroughputExperiment {
             FatTreeGraph G = new FatTreeGraph(4);
             FatTreeRoutingAlgorithm ra = new FatTreeRoutingAlgorithm(G, false);
 
-            Topology topology = new Topology(G, ra);
+            //Integer[] hosts = G.hosts().toArray(new Integer[0]);
             
+            PairGenerator pairGenerator = new StrideIndex(1);
+            Topology topology = new Topology(G, ra, pairGenerator);
+            
+			//new StaggeredProb(hosts, 4, 1, 0);
+			//new InterPodIncoming(hosts, k, ra, G);
 
+            
+            
             ThroughputExperiment experiment = new ThroughputExperiment(topology);
-            Integer[] hosts = G.hosts().toArray(new Integer[0]);
+            
 
             Map<Integer, Integer> traffic = new HashMap<>();
 
@@ -132,12 +140,7 @@ public class ThroughputExperiment {
             							//	= topology.getSourceNodeIDs();
             List<Integer> destinationNodeIDs = new ArrayList<>(); 
             								//= topology.getDestinationNodeIDs();
-            PairGenerator pairGenerator = new StrideIndex(hosts, 1);
-            								//new StaggeredProb(hosts, 4, 1, 0);
-            								//new InterPodIncoming(hosts, k, ra, G);
-
-			pairGenerator.pairHosts();
-			pairGenerator.checkValid();
+            
 			
 			sourceNodeIDs = pairGenerator.getSources();
 			destinationNodeIDs = pairGenerator.getDestinations();
@@ -159,8 +162,8 @@ public class ThroughputExperiment {
             double thp = 0, privateThp = 0;
             for (int i = 0; i < topology.getHosts().size(); i++) {
                 Host host = topology.getHosts().get(i);
-                if(host instanceof DestinationNode) {
-                    DestinationNode destinationNode = (DestinationNode)host;
+                if(host.type == TypeOfHost.Destionation || host.type == TypeOfHost.Mix) {
+                    Host destinationNode = host;
                     if (destinationNode.getReceivedPacketInNode() != 0) {
                         /*System.out.println("DesNode " + destinationNode.getId() + " receives: "
                                 + destinationNode.getReceivedPacketInNode() + " packets "
