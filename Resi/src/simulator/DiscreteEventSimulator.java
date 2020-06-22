@@ -80,7 +80,10 @@ public class DiscreteEventSimulator extends Simulator {
 					lastPercentage = percentage;
 					StdOut.printProgress("Progress", startTime, (long) timeLimit, currentTime); 
 				}
-				
+				if(countEvent == 65)
+				{
+					System.out.println("breakpoint here");
+				}
 				 
 			}
 			StdOut.print("\r");
@@ -133,7 +136,7 @@ public class DiscreteEventSimulator extends Simulator {
 		// todo chu y kiem tra moi thu extends Element Class
 		List<Host> allHosts = this.topology.getHosts();
 		for (Host host : allHosts) {
-			if (host.type != TypeOfHost.Destionation) {//tuc no la source
+			if (host.type != TypeOfHost.Destination) {//tuc no la source
 				//soonestEndTime will be updated later as events are executed
 				host.physicalLayer.sourceQueue.sim = this;
 				halfSizeOfEvents++;
