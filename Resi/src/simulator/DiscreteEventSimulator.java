@@ -13,8 +13,8 @@ import network.elements.ExitBuffer;
 import network.elements.UnidirectionalWay;
 import network.entities.Host;
 import network.entities.Link;
-import network.entities.SourceNode;
 import network.entities.Switch;
+import network.entities.TypeOfHost;
 
 public class DiscreteEventSimulator extends Simulator {
 	public int numReceived = 0;
@@ -133,7 +133,7 @@ public class DiscreteEventSimulator extends Simulator {
 		// todo chu y kiem tra moi thu extends Element Class
 		List<Host> allHosts = this.topology.getHosts();
 		for (Host host : allHosts) {
-			if (host instanceof SourceNode) {
+			if (host.type != TypeOfHost.Destionation) {//tuc no la source
 				//soonestEndTime will be updated later as events are executed
 				host.physicalLayer.sourceQueue.sim = this;
 				halfSizeOfEvents++;
