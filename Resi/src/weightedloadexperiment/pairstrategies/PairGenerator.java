@@ -2,14 +2,18 @@ package weightedloadexperiment.pairstrategies;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import network.Topology;
+import network.elements.UnidirectionalWay;
+import network.entities.Link;
 import network.entities.Switch;
 
 public abstract class PairGenerator {
 	
-	 private final int BANDWIDTH = 106670000;
+	
     private Integer[] allHosts;
+    
 
     public Integer[] getAllHosts() {
         return allHosts;
@@ -57,30 +61,29 @@ public abstract class PairGenerator {
 
     public void setUpBandwidth(Topology network)
     {
-        int k = allHosts.length;
-        k = (int)(Math.cbrt(k*4));
-        int minCoreIndex = k*k*k/4 + k*k;
-        int maxCoreIndex = minCoreIndex + (k*k/4 - 1);
-        List<Switch> switches = network.getSwitches();
-        for(Switch sw : switches)
-        {
-            /*Map<Integer, IntegratedPort> ports = sw.ports;
-            for(IntegratedPort p : ports.values())
-            {
-                Link link = p.getLink();
-                if(link.getBandwidth() != BANDWIDTH) {
-                    int[] pair = link.getPairs();
-                    if ((pair[0] >= minCoreIndex && pair[0] <= maxCoreIndex)
-                            ||
-                            (pair[1] >= minCoreIndex && pair[1] <= maxCoreIndex)
-                    ) {
-                        /*System.out.println("Bandwidth of (" + pair[0] + ", " + pair[1] + ") changed from " + link.getBandwidth() +
-                                " to " + BANDWIDTH
-                        );*/
-                        /*link.setBandwidth(BANDWIDTH);
-                    }
-                }
-            }*/
-        }
+        
+        
+    }
+    
+    
+    public boolean isOversubscriptedLink(Link link, int maxIndexOfCore, int minIndexOfCore)
+    {
+    	
+    	boolean result = false;
+    	
+    	
+    	Map<Integer, UnidirectionalWay> ways = link.Ways();
+    	for(UnidirectionalWay way : ways.values())
+    	{
+    		int idFromNode = way.getFromNode().getId(); 
+    		int idToNode = way.getToNode().getId(); 
+    		if(( idFromNode >= minIndexOfCore && idFromNode <= maxIndexOfCore)
+    				|| (idToNode >= minIndexOfCore && idToNode <= maxIndexOfCore)
+    				)
+    		{
+    			result = true;
+    		}
+    	}
+    	return result;
     }
 }
