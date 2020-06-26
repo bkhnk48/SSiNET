@@ -80,10 +80,7 @@ public class DiscreteEventSimulator extends Simulator {
 					lastPercentage = percentage;
 					StdOut.printProgress("Progress", startTime, (long) timeLimit, currentTime); 
 				}
-				if(countEvent == 65)
-				{
-					System.out.println("breakpoint here");
-				}
+				
 				 
 			}
 			StdOut.print("\r");
