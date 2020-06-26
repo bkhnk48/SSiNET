@@ -43,9 +43,9 @@ public class RandomGenerator {
 //        StdOut.println(r.nextDouble());
 //        StdOut.println(r.nextDouble());
 //        RandomGenerator.setSeed(123);
-        System.out.println(RandomGenerator.nextDouble());
-        System.out.println(RandomGenerator.nextDouble());
-        System.out.println(RandomGenerator.nextDouble());
-        System.out.println(RandomGenerator.nextDouble());
+        StdOut.println(RandomGenerator.nextDouble());
+        StdOut.println(RandomGenerator.nextDouble());
+        StdOut.println(RandomGenerator.nextDouble());
+        StdOut.println(RandomGenerator.nextDouble());
     }
 }
