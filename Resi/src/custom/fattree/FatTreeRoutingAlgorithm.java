@@ -20,9 +20,27 @@ public class FatTreeRoutingAlgorithm implements RoutingAlgorithm {
     private FatTreeGraph G;
     private Map<Pair<Integer, Integer>, RoutingPath> precomputedPaths = new HashMap<>();
     private Map<Integer, Map<Integer, Integer>> suffixTables = new HashMap<>();
-    private Map<Integer,
+    
+    public Map<Integer, Map<Integer, Integer>> getSuffixTables() {
+		return suffixTables;
+	}
+
+	public void setSuffixTables(Map<Integer, Map<Integer, Integer>> suffixTables) {
+		this.suffixTables = suffixTables;
+	}
+
+	private Map<Integer,
             Map<Triplet<Integer, Integer, Integer>, Integer>> prefixTables = new HashMap<>();
-    private Map<Integer,
+	
+    public Map<Integer, Map<Triplet<Integer, Integer, Integer>, Integer>> getPrefixTables() {
+		return prefixTables;
+	}
+
+	public void setPrefixTables(Map<Integer, Map<Triplet<Integer, Integer, Integer>, Integer>> prefixTables) {
+		this.prefixTables = prefixTables;
+	}
+
+	private Map<Integer,
             Map<Pair<Integer, Integer>, Integer>> corePrefixTables = new HashMap<>();
 
     public FatTreeRoutingAlgorithm(FatTreeGraph G, boolean precomputed) {
