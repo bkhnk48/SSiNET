@@ -29,7 +29,7 @@ public class Topology {
     private Map<Integer, Switch> switchById;
     private List<Integer> sourceNodes;
     private List<Integer> destinationNodes;
-
+    private long bandwithToHost = 0;
     //ThanhNT 14/10 new property
     public Map<Integer, String> cordOfNodes;
     //Endof ThanhNT 14/10 new property
@@ -120,6 +120,7 @@ public class Topology {
         
         pairGenerator.pairHosts();
         pairGenerator.checkValid();
+       
 
         List<Integer> sourceNodeIDs = new ArrayList<>();  
 		//	= topology.getSourceNodeIDs();
@@ -172,20 +173,14 @@ public class Topology {
                 destinationNode.networkLayer = networkLayer;
         	}
         	
-            
-            
-
-            //ThanhNT 14/10 add new statements to add new ID of HOST
+           //ThanhNT 14/10 add new statements to add new ID of HOST
             cordOfNodes.put(destinationNodeID, "");
             //Endof ThanhNT 14/10 add new statements to add new ID of HOST
 
             
         }
 
-        
-
-
-        
+    
 
         // todo them phan add link tu switch den host kieu nhu o tren
         // link from switch to host
@@ -196,6 +191,7 @@ public class Topology {
 
             // create new link
             Link link = new Link(host, sw, Constant.HOST_TO_SWITCH_LENGTH);
+           
             host.physicalLayer.links.put(host.getId(), link);// rieng link host luu id la id cua host
             sw.physicalLayer.links.put(host.getId(), link);
 
@@ -224,7 +220,11 @@ public class Topology {
             cordOfNodes.put(host.getId(), C.getCoordOfHost(sw.getId(), Constant.HOST_TO_SWITCH_LENGTH));
             //Endof ThanhNT 14/10 add new statements to insert coord of HOST
         }
+        
+        pairGenerator.setUpBandwidth(this);
     }
+    
+    
 
     public List<Integer> getSourceNodeIDs(){
         return sourceNodes;
