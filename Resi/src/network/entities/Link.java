@@ -20,7 +20,15 @@ public class Link extends Device {
    
 	private Map<Integer, UnidirectionalWay> ways; // key int is the ID of toNode in way
     private long bandwidth;
-    private double length;
+    public long getBandwidth() {
+		return bandwidth;
+	}
+
+	public void setBandwidth(long bandwidth) {
+		this.bandwidth = bandwidth;
+	}
+
+	private double length;
 
     public Link(Node u, Node v) { // link co 2 unidirectional way nen can put 2 new way moi theo 2 chieu khi khoi tao
         super(0);
@@ -51,8 +59,8 @@ public class Link extends Device {
     }
 
     public long serialLatency(int packetSize) {
-        if(packetSize != 100000 && this.bandwidth != 1e9)
-            System.out.println("INFO: " + packetSize + " " + this.bandwidth);
+        //if(packetSize != 100000 && this.bandwidth != 1e9)
+        //    System.out.println("INFO: " + packetSize + " " + this.bandwidth);
         return (long) (1e9 * packetSize / this.bandwidth);
     }
     public long propagationLatency() {
