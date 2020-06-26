@@ -2,9 +2,8 @@ package weightedloadexperiment.pairstrategies;
 
 import java.util.List;
 
-public class StrideIndex extends PairGenerator {
+public class StrideIndex extends OverSubscription {
     private int stride;
-    private int modulo ;
     
     public StrideIndex(int stride)
     {
@@ -18,8 +17,10 @@ public class StrideIndex extends PairGenerator {
         super(allHosts);
         this.stride = stride;
         modulo = allHosts.length;
+        
     }
 
+    @Override
     public void pairHosts()
     {
         List<Integer> sources = getSources();
@@ -37,10 +38,5 @@ public class StrideIndex extends PairGenerator {
         setDestinations(destinations);
     }
     
-    @Override
-    public void setAllHosts(Integer[] allHosts)
-    {
-    	super.setAllHosts(allHosts);
-    	this.modulo = allHosts.length;
-    }
+    
 }
