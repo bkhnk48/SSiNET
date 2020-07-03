@@ -13,7 +13,7 @@ import custom.fattree.FatTreeRoutingAlgorithm;
 
 public class InterPodIncoming extends OverSubscription {
 
-    private int k;
+    public int k;
     private int [][] adjMx;
     private FatTreeRoutingAlgorithm routing;
     private FatTreeGraph G;
@@ -237,7 +237,7 @@ public class InterPodIncoming extends OverSubscription {
         }
     }
 
-    private int getCoreSwitch(int source, int destination)
+    public int getCoreSwitch(int source, int destination)
     {
         int edge = G.adj(source).get(0);
         int agg = G.adj(edge).get(k/2);
@@ -245,7 +245,7 @@ public class InterPodIncoming extends OverSubscription {
         return core;
     }
 
-    private int getRealCoreSwitch(int source, int destination)
+    public int getRealCoreSwitch(int source, int destination)
     {
         int edge = G.adj(source).get(0);
         Address address = G.getAddress(destination);
