@@ -27,6 +27,7 @@ import weightedloadexperiment.pairstrategies.ForcePair;
 import weightedloadexperiment.pairstrategies.InterPodIncoming;
 import weightedloadexperiment.pairstrategies.PairGenerator;
 import weightedloadexperiment.pairstrategies.StrideIndex;
+import weightedloadexperiment.pairstrategies.interpod.MinimalCoreSwitches;
 
 
 public class ThroughputExperiment {
@@ -127,7 +128,8 @@ public class ThroughputExperiment {
             
             PairGenerator pairGenerator = //new StrideIndex(8);
             								//new InterPodIncoming(ra, G);
-            								new ForcePair(ra, G);
+            								//new ForcePair(ra, G, 6);
+            								new MinimalCoreSwitches(ra, G);
             Topology topology = new Topology(G, ra, pairGenerator);
             
 			//new StaggeredProb(hosts, 4, 1, 0);
