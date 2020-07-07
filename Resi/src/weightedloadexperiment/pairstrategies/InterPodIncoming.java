@@ -169,15 +169,26 @@ public class InterPodIncoming extends OverSubscription {
         Map<Integer, Integer> flowPerCore = new HashMap<Integer, Integer>();
         List<Integer> sources = getSources();
         List<Integer> destinations = getDestinations();
+        int realCore = 0;
         //int count = 0;
         int sizeOfPod = k*k/4;
         if(sources.size() != k*k*k/4)
         {
-            System.out.print("Not enough pair! Just " + sources.size());
+            System.out.println("Not enough pair! Just " + sources.size());
+            for(int i = 0; i < sources.size(); i++)
+            {
+                realCore = getRealCoreSwitch(sources.get(i), destinations.get(i));
+                System.out.println("From " + sources.get(i) + " through " +
+                        getCoreSwitch(sources.get(i), destinations.get(i))
+                        + "/" + realCore
+                        + " to "
+                        + destinations.get(i)
+                );
+            }
             System.exit(0);
         }
 
-        int realCore = 0;
+        
         for(int i = 0; i < sources.size(); i++)
         {
             realCore = getRealCoreSwitch(sources.get(i), destinations.get(i));
