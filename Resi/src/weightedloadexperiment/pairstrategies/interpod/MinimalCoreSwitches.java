@@ -56,6 +56,8 @@ public class MinimalCoreSwitches extends InterPodIncoming {
 		int numOfOversubscriptedCores = k*k/8;
 		oversubscriptedCores = new int[numOfOversubscriptedCores];
 		delta = delta % numOfOversubscriptedCores;
+		delta = 2;
+		System.out.println("Delta = " + delta);
 		
 		for(int i = delta; (i - delta) < numOfOversubscriptedCores; i++)
 		{
@@ -111,9 +113,11 @@ public class MinimalCoreSwitches extends InterPodIncoming {
 		
 		while(countOfLoop < oversubscriptedCores.length && !found)
 		{
+			int delta = RandomGenerator.nextInt(0, k*k*k/4);
+			
 			for(int i = 0; i < k*k*k/4; i++)
 			{
-				int src = getHostIndex(i);
+				int src = getHostIndex((i + delta) % (k*k*k/4));
 				if(!sources.contains(src) && src != dst && (src / (k*k/4 + k) != dst / (k*k/4 + k)))
 				{
 					if(getRealCoreSwitch(src, dst) == oversubscriptedCores[firstIndex])
