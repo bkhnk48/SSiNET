@@ -1,5 +1,6 @@
 package weightedloadexperiment.pairstrategies.interpod;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import common.RandomGenerator;
@@ -56,7 +57,7 @@ public class MinimalCoreSwitches extends InterPodIncoming {
 		oversubscriptedCores = new int[numOfOversubscriptedCores];
 		delta = delta % numOfOversubscriptedCores;
 		
-		for(int i = delta; i < numOfOversubscriptedCores; i++)
+		for(int i = delta; (i - delta) < numOfOversubscriptedCores; i++)
 		{
 			oversubscriptedCores[i - delta] = allCores[i % (k*k/4)];
 		}
@@ -64,19 +65,24 @@ public class MinimalCoreSwitches extends InterPodIncoming {
 		delta = delta + RandomGenerator.nextInt(0, k*k/4);
 		delta = delta % numOfOversubscriptedCores;
 		List<Integer> dests = getDestinations();
-		int previousDst = 0;
+		 
+		List<Integer> usedPods = new ArrayList<Integer>();
 		
 		for(int pod = 0; pod < k; pod++)
 		{
+			usedPods = new ArrayList<Integer>();
 			int indexOfFirstCore = delta;
 			for(int offset = 0; offset < k*k/4; offset++)
 			{
 				int i = pod * k*k/4 + offset;
 				int dst = getHostIndex(i);
-				if(isCoreAvailable(dst, indexOfFirstCore))
+				if(isCoreAvailable(dst, indexOfFirstCore, usedPods))
 				{
 					dests.add(dst);
+					//int src = getSources().get(getSources().size() - 1);
+					
 				}
+				 
 			}
 		}
 	}
@@ -92,8 +98,9 @@ public class MinimalCoreSwitches extends InterPodIncoming {
 		return result;
 	}
 	
-	private boolean isCoreAvailable(int dst, int firstIndex)
+	private boolean isCoreAvailable(int dst, int firstIndex, List<Integer> usedPods)
 	{
+		int countOfLoop = 0;
 		boolean found = false;
 		List<Integer> sources = getSources();
 		List<Integer> dests = getDestinations();
@@ -102,27 +109,61 @@ public class MinimalCoreSwitches extends InterPodIncoming {
 			return false;
 		}
 		
-		while(firstIndex < oversubscriptedCores.length && !found)
+		while(countOfLoop < oversubscriptedCores.length && !found)
 		{
 			for(int i = 0; i < k*k*k/4; i++)
 			{
 				int src = getHostIndex(i);
-				if(!sources.contains(src) && src != dst && (src / k != dst / k))
+				if(!sources.contains(src) && src != dst && (src / (k*k/4 + k) != dst / (k*k/4 + k)))
 				{
 					if(getRealCoreSwitch(src, dst) == oversubscriptedCores[firstIndex])
 					{
-						sources.add(src);
-						found = true;
-						return found;
+						if(isFromAcceptablePod(usedPods, src, dst))
+						{
+							sources.add(src);
+							found = true;
+							return found;
+						}
 					}
 				}
 			}
 			if(!found)
 			{
-				firstIndex++;
+				firstIndex = (firstIndex + 1) % oversubscriptedCores.length;
 			}
+			countOfLoop++;
 		}
 		return found;
+	}
+	
+	private boolean isFromAcceptablePod(List<Integer> usedPods, int src, int dst)
+	{
+		
+		int pod = src / (k*k/4 + k);
+		if(usedPods.size() == 0)
+		{
+			usedPods.add(pod);
+			return true;
+		}
+		else {
+			if(!usedPods.contains(pod))
+			{
+				usedPods.add(pod);
+				return true;
+			}
+			else {
+				int delta = (k - 1) - usedPods.size();
+				int remaining = (k*k/4) - dst % (k*k/4);
+				if(delta < remaining && delta != 0)
+				{
+					return false;
+				}
+				else {
+					return true;
+				}
+			}
+		}
+		
 	}
 
 }
