@@ -13,10 +13,10 @@ import custom.fattree.FatTreeRoutingAlgorithm;
 
 public class InterPodIncoming extends OverSubscription {
 
-    public int k;
+    //public int k;
     private int [][] adjMx;
-    private FatTreeRoutingAlgorithm routing;
-    private FatTreeGraph G;
+    //private FatTreeRoutingAlgorithm routing;
+    //private FatTreeGraph G;
     
     public InterPodIncoming(FatTreeRoutingAlgorithm routing, FatTreeGraph G)
     {
