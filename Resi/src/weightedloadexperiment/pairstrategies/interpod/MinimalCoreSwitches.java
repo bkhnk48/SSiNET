@@ -56,8 +56,8 @@ public class MinimalCoreSwitches extends InterPodIncoming {
 		int numOfOversubscriptedCores = k*k/8;
 		oversubscriptedCores = new int[numOfOversubscriptedCores];
 		delta = delta % numOfOversubscriptedCores;
-		delta = 2;
-		System.out.println("Delta = " + delta);
+		//delta = 2;
+		//System.out.println("Delta = " + delta);
 		
 		for(int i = delta; (i - delta) < numOfOversubscriptedCores; i++)
 		{
