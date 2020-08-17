@@ -1,18 +1,21 @@
 package network.layers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import config.Constant;
 import custom.fattree.FatTreeRoutingAlgorithm;
 import events.EMovingInSwitchEvent;
 
 import infrastructure.event.Event;
+import javatuples.Pair;
 import network.elements.EntranceBuffer;
 import network.elements.ExitBuffer;
 import network.elements.Packet;
 
 
-public class NetworkLayer {
-	protected FatTreeRoutingAlgorithm fatTreeRoutingAlgorithm;
-
+public class NetworkLayer extends Layer{
+	
 	public NetworkLayer(FatTreeRoutingAlgorithm fatTreeRoutingAlgorithm) {
 		this.fatTreeRoutingAlgorithm = fatTreeRoutingAlgorithm;
 	}
@@ -47,10 +50,12 @@ public class NetworkLayer {
 	public void route(EntranceBuffer entranceBuffer) {
 		if (entranceBuffer.getNextNodeId() == -1) {
 			Packet packet = entranceBuffer.getPeekPacket();
-			if((packet ==null)){
+			if((packet == null)){
 				System.out.println("ERROR: 2");
 			}
-			int nextNodeID = fatTreeRoutingAlgorithm.next(packet.getSource(), entranceBuffer.getNode().getId(), packet.getDestination());
+			
+			int nextNodeID = //fatTreeRoutingAlgorithm.next(packet.getSource(), entranceBuffer.getNode().getId(), packet.getDestination());
+					fatTreeRoutingAlgorithm.next(packet, entranceBuffer.getNode());
 
 			entranceBuffer.setNextNode(nextNodeID);
 
