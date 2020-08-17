@@ -22,7 +22,26 @@ public class ForcePair extends InterPodIncoming {
 	@Override
 	public void checkValid()
     {
-		if(modulo != 5)
+		List<Integer> sources = getSources();
+        List<Integer> destinations = getDestinations();
+        int realCore = 0;
+        
+        
+        for(int i = 0; i < sources.size(); i++)
+        {
+            realCore = getRealCoreSwitch(sources.get(i), destinations.get(i));
+            System.out.println("From " + sources.get(i) + " through " +
+                    getCoreSwitch(sources.get(i), destinations.get(i))
+                    + "/" + realCore
+                    + " to "
+                    + destinations.get(i) 
+                    //+ "(HostID = " + getHostID(destinations.get(i)) + ")"
+            );
+
+            
+        }
+		return;
+		/*if(modulo != 5)
 		{
 			super.checkValid();
 		}
@@ -40,7 +59,7 @@ public class ForcePair extends InterPodIncoming {
 	                    + destinations.get(i)
 	            );
 	        }
-		}
+		}*/
     }
 	public void pairHosts()
 	{
@@ -138,6 +157,41 @@ public class ForcePair extends InterPodIncoming {
 									0, 25, 27, 24}; 
 		}
 		
+		if(x == 13)
+		{
+			                     //11, 16,25, 18,19, 24,26, 27, 0, 1,  2, 3,  8,  9, 10, 17
+			//results = new Integer[]{1, 18, 8, 11,25, 26, 3,  9, 2,10, 27,17, 10,  0, 19, 24};
+            					  //11, 16,25, 18,19, 24,26, 27, 0, 1,  2, 3,  8,  9, 10, 17
+			//results = new Integer[]{24, 27, 1, 26, 0, 18,19, 16,10,25, 11, 8,  2, 17,  3,  9};
+			                      //11, 16,25, 18,19, 24,26, 27, 0, 1,  2, 3,  8,  9, 10, 17
+			results = new Integer[]{ 0, 26, 9, 11, 1,  3,19, 17,18,24, 10,25,  2, 16, 27,  8};
+		}
+		
+		if(x == 12)
+		{
+			results = new Integer[]{25, 18, 16, 27, 0, 26, 3, 17, 2, 8, 11, 9, 10, 24, 19, 1};
+		}
+		
+		if(x == 11)
+		{
+			results = new Integer[]{1, 10, 19, 8, 9, 18, 16, 17, 26, 27, 24, 25, 2, 3, 0, 11};
+		}
+		
+		if(x == 10)
+		{
+			results = new Integer[]{25, 18, 16, 27, 0, 26, 10, 17, 2, 8, 11, 9, 3, 24, 19, 1};
+		}
+		
+		if(x == 9)
+		{
+			results = new Integer[]{25, 2, 16, 3, 0, 18, 19, 17, 10, 8, 11, 9, 26, 24, 27, 1};
+		}
+		
+		if(x == 8)
+		{
+			results = new Integer[]{24, 26, 9, 27, 0, 2, 3, 8, 10, 17, 11, 16, 18, 25, 19, 1};
+		}
+		
 		if(x == 5)
 		{
 			results = new Integer[16];
@@ -157,6 +211,7 @@ public class ForcePair extends InterPodIncoming {
 		{
 			results = new Integer[]{27, 9, 2, 1, 3, 17, 16, 10, 8, 18, 24, 11, 0, 19, 25, 26}; 
 		}
+		
 		return results;
 	}
 
