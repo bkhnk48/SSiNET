@@ -129,7 +129,7 @@ public class ThroughputExperiment {
             
             PairGenerator pairGenerator = //new StrideIndex(8);
             								//new InterPodIncoming(ra, G);
-            								//new ForcePair(ra, G, 6);
+            								//new ForcePair(ra, G, 13);
             								//new MinimalCoreSwitches(ra, G);
             								new SameIDOutgoing(G, ra);
             Topology topology = new Topology(G, ra, pairGenerator);
