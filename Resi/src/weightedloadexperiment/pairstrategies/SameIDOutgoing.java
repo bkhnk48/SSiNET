@@ -92,7 +92,17 @@ public class SameIDOutgoing extends OverSubscription {
             if(allTempDsts.size() == k/2)
             {
             	i += k/2;
+            	System.out.print("\n");
             	sources.addAll(allTempSrcs); destinations.addAll(allTempDsts);
+            	for(int m = 0; m < allTempDsts.size(); m++)
+            	{
+            		System.out.print(allTempDsts.get(m) + "(" + getHostID(allTempDsts.get(m)) + ") ");
+            		int id = allTempDsts.get(m);
+            		Address host = G.getAddress(id);
+            		System.out.print("Addr: " + host._1 + "." + host._2 + "." + host._3 + "." + host._4);
+            		System.out.println();
+            	}
+            	System.out.print("\n");
             }
             else {
             	delta = RandomGenerator.nextInt(0, k*k*k/4);
