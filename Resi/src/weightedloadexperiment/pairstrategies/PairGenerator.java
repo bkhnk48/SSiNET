@@ -66,7 +66,7 @@ public abstract class PairGenerator {
     }
     
     
-    public boolean isOversubscriptedLink(Link link, int maxIndexOfCore, int minIndexOfCore)
+    public static boolean isOversubscriptedLink(Link link, int maxIndexOfCore, int minIndexOfCore)
     {
     	
     	boolean result = false;
