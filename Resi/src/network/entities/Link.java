@@ -5,7 +5,7 @@ import config.Constant;
 import infrastructure.entity.Device;
 import infrastructure.entity.Node;
 import network.elements.UnidirectionalWay;
-
+import weightedloadexperiment.pairstrategies.OverSubscription;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -61,6 +61,19 @@ public class Link extends Device {
     public long serialLatency(int packetSize) {
         //if(packetSize != 100000 && this.bandwidth != 1e9)
         //    System.out.println("INFO: " + packetSize + " " + this.bandwidth);
+    	if(OverSubscription.isOversubscriptedLink(this, 35, 32))
+    	{
+    		if(this.bandwidth != OverSubscription.OVERSUBSCRIPTION_BANDWIDTH)
+    		{
+    			System.exit(0);
+    		}
+    	}
+    	else {
+    		if(this.bandwidth != OverSubscription.NORMAL_BANDWIDTH)
+    		{
+    			System.exit(0);
+    		}
+    	}
         return (long) (1e9 * packetSize / this.bandwidth);
     }
     public long propagationLatency() {
