@@ -13,8 +13,8 @@ import network.entities.Switch;
 
 public abstract class OverSubscription extends PairGenerator {
 
-	private final int OVERSUBSCRIPTION_BANDWIDTH = 106670000;
-	private final int NORMAL_BANDWIDTH = 96*1000*1000;
+	public static final int OVERSUBSCRIPTION_BANDWIDTH = 106670000;
+	public static final int NORMAL_BANDWIDTH = 96*1000*1000;
 	public int modulo ;
 	
 	public int k;
