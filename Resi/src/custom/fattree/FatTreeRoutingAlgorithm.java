@@ -4,14 +4,15 @@ package custom.fattree;
 //import kotlin.Triple;
 //import kotlin.TuplesKt;
 import javatuples.* ;
-
-
+import network.elements.Packet;
 import routing.RoutingAlgorithm;
 import routing.RoutingPath;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import infrastructure.entity.Node;
 
 /**
  * Created by Dandoh on 5/24/17.
@@ -180,4 +181,10 @@ public class FatTreeRoutingAlgorithm implements RoutingAlgorithm {
     public RoutingPath path(int source, int destination) {
     	return null;
     }
+    
+    public int next(Packet packet, Node node) 
+    {
+    	return next(packet.getSource(), node.getId(), packet.getDestination());
+    }
+
 }
