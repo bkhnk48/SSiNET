@@ -17,9 +17,9 @@ import java.util.Map;
  * Created by Dandoh on 5/24/17.
  */
 public class FatTreeRoutingAlgorithm implements RoutingAlgorithm {
-    private FatTreeGraph G;
-    private Map<Pair<Integer, Integer>, RoutingPath> precomputedPaths = new HashMap<>();
-    private Map<Integer, Map<Integer, Integer>> suffixTables = new HashMap<>();
+    public FatTreeGraph G;
+    public Map<Pair<Integer, Integer>, RoutingPath> precomputedPaths = new HashMap<>();
+    public Map<Integer, Map<Integer, Integer>> suffixTables = new HashMap<>();
     
     public Map<Integer, Map<Integer, Integer>> getSuffixTables() {
 		return suffixTables;
@@ -41,9 +41,11 @@ public class FatTreeRoutingAlgorithm implements RoutingAlgorithm {
 	}
 
 	private Map<Integer,
-            Map<Pair<Integer, Integer>, Integer>> corePrefixTables = new HashMap<>();
+        Map<Pair<Integer, Integer>, Integer>> corePrefixTables = new HashMap<>();
 
-    public FatTreeRoutingAlgorithm(FatTreeGraph G, boolean precomputed) {
+    
+
+	public FatTreeRoutingAlgorithm(FatTreeGraph G, boolean precomputed) {
         this.G = G;
         buildTables();
         if (precomputed) {
@@ -176,21 +178,6 @@ public class FatTreeRoutingAlgorithm implements RoutingAlgorithm {
 
     @Override
     public RoutingPath path(int source, int destination) {
-        if (precomputedPaths.containsKey(new Pair<>(source, destination))) {
-            return precomputedPaths.get(new Pair<>(source, destination));
-        } else {
-            RoutingPath rp = new RoutingPath();
-            int current = source;
-            while (current != destination) {
-//                System.out.println(current);
-                if (current != source) {
-                    rp.path.add(current);
-                }
-                current = next(source, current, destination);
-
-            }
-            precomputedPaths.put(new Pair<>(source, destination), rp);
-            return rp;
-        }
+    	return null;
     }
 }
