@@ -2,6 +2,7 @@ package infrastructure.entity;
 
 
 import network.layers.*;
+import routing.RoutingAlgorithm;
 import simulator.DiscreteEventSimulator;
 import simulator.Simulator;
 /**
@@ -9,9 +10,24 @@ import simulator.Simulator;
  */
 public abstract class Node extends Device {
 	
-	public NetworkLayer networkLayer;
+	private NetworkLayer networkLayer;
 	public PhysicalLayer physicalLayer;
 	public DataLinkLayer dataLinkLayer;
+	
+	
+	public void setNetworkLayer(RoutingAlgorithm ra) {
+		this.networkLayer = new NetworkLayer(ra);
+	}
+	
+	public NetworkLayer getNetworkLayer() {
+		return networkLayer;
+	}
+
+	public void setNetworkLayer(NetworkLayer networkLayer) {
+		this.networkLayer = networkLayer;
+	}
+
+	
 	
     public Node(int id) {
         super(id);
