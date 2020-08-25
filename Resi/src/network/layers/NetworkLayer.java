@@ -12,12 +12,13 @@ import javatuples.Pair;
 import network.elements.EntranceBuffer;
 import network.elements.ExitBuffer;
 import network.elements.Packet;
+import routing.RoutingAlgorithm;
 
 
 public class NetworkLayer extends Layer{
 	
-	public NetworkLayer(FatTreeRoutingAlgorithm fatTreeRoutingAlgorithm) {
-		this.fatTreeRoutingAlgorithm = fatTreeRoutingAlgorithm;
+	public NetworkLayer(RoutingAlgorithm ra) {
+		this.routingAlgorithm = ra;
 	}
 
 	public void controlFlow(ExitBuffer exitBuffer) {
@@ -55,7 +56,7 @@ public class NetworkLayer extends Layer{
 			}
 			
 			int nextNodeID = //fatTreeRoutingAlgorithm.next(packet.getSource(), entranceBuffer.getNode().getId(), packet.getDestination());
-					fatTreeRoutingAlgorithm.next(packet, entranceBuffer.getNode());
+					routingAlgorithm.next(packet, entranceBuffer.getNode());
 
 			entranceBuffer.setNextNode(nextNodeID);
 
