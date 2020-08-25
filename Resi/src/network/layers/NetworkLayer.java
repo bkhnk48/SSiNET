@@ -18,8 +18,14 @@ import routing.RoutingAlgorithm;
 public class NetworkLayer extends Layer{
 	
 	public NetworkLayer(RoutingAlgorithm ra, Node node) {
-		
-		this.routingAlgorithm = ra;
+		RoutingAlgorithm routingAlgorithm = null;
+		try {
+			routingAlgorithm = ra.build(node);
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.routingAlgorithm = routingAlgorithm;
 	}
 
 	public void controlFlow(ExitBuffer exitBuffer) {
