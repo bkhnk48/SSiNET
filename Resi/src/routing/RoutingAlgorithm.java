@@ -8,5 +8,7 @@ public interface RoutingAlgorithm {
 
     RoutingPath path(int source, int destination);
     
-    int next(Packet packet, Node node) ;
+    int next(Packet packet, Node node);
+    
+    void build(Node node);
 }
