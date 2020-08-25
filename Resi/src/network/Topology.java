@@ -64,7 +64,7 @@ public class Topology {
             sw.physicalLayer = new PhysicalLayer(sw, graph.getK());
             //sw.networkLayer = //networkLayer;
             //		new NetworkLayer(routingAlgorithm);
-            sw.setNetworkLayer(routingAlgorithm);
+            sw.setNetworkLayer(routingAlgorithm, sw);
         }
         
      // link from switch to switch
@@ -146,7 +146,7 @@ public class Topology {
             sourceNode.physicalLayer = new PhysicalLayer(sourceNode);
             //sourceNode.networkLayer = //networkLayer;
             //		new NetworkLayer(routingAlgorithm);
-            sourceNode.setNetworkLayer(routingAlgorithm);
+            sourceNode.setNetworkLayer(routingAlgorithm, sourceNode);
             hosts.add(sourceNode);
             hostById.put(sourceNodeID, sourceNode);
 
@@ -176,7 +176,7 @@ public class Topology {
         		destinationNode.physicalLayer = new PhysicalLayer(destinationNode);
                 //destinationNode.networkLayer = //networkLayer;
                 //		new NetworkLayer(routingAlgorithm);
-        		destinationNode.setNetworkLayer(routingAlgorithm);
+        		destinationNode.setNetworkLayer(routingAlgorithm, destinationNode);
         	}
         	
            //ThanhNT 14/10 add new statements to add new ID of HOST
