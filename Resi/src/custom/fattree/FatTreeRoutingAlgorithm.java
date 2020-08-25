@@ -5,6 +5,8 @@ package custom.fattree;
 //import kotlin.TuplesKt;
 import javatuples.* ;
 import network.elements.Packet;
+import network.entities.Host;
+import network.entities.Switch;
 import routing.RoutingAlgorithm;
 import routing.RoutingPath;
 
@@ -17,7 +19,7 @@ import infrastructure.entity.Node;
 /**
  * Created by Dandoh on 5/24/17.
  */
-public class FatTreeRoutingAlgorithm implements RoutingAlgorithm {
+public class FatTreeRoutingAlgorithm implements RoutingAlgorithm, Cloneable {
     public FatTreeGraph G;
     public Map<Pair<Integer, Integer>, RoutingPath> precomputedPaths = new HashMap<>();
     public Map<Integer, Map<Integer, Integer>> suffixTables = new HashMap<>();
@@ -33,7 +35,11 @@ public class FatTreeRoutingAlgorithm implements RoutingAlgorithm {
 	private Map<Integer,
             Map<Triplet<Integer, Integer, Integer>, Integer>> prefixTables = new HashMap<>();
 	
-    public Map<Integer, Map<Triplet<Integer, Integer, Integer>, Integer>> getPrefixTables() {
+    public void setCorePrefixTables(Map<Integer, Map<Pair<Integer, Integer>, Integer>> corePrefixTables) {
+		this.corePrefixTables = corePrefixTables;
+	}
+
+	public Map<Integer, Map<Triplet<Integer, Integer, Integer>, Integer>> getPrefixTables() {
 		return prefixTables;
 	}
 
@@ -187,9 +193,37 @@ public class FatTreeRoutingAlgorithm implements RoutingAlgorithm {
     	return next(packet.getSource(), node.getId(), packet.getDestination());
     }
     
-    public void build(Node node)
+    public RoutingAlgorithm build(Node node) throws CloneNotSupportedException
     {
-    	
+    	RoutingAlgorithm ra = (RoutingAlgorithm) this.clone();
+    	if(node instanceof Host)
+    	{
+    		((FatTreeRoutingAlgorithm)ra).setCorePrefixTables(null);
+    		((FatTreeRoutingAlgorithm)ra).setPrefixTables(null);
+    		((FatTreeRoutingAlgorithm)ra).setSuffixTables(null);
+    	}
+    	if(node instanceof Switch)
+    	{
+    		int id = ((Switch)node).getId();
+    		int type = G.switchType(id);
+    		if(type == FatTreeGraph.AGG)
+    		{
+    			((FatTreeRoutingAlgorithm)ra).corePrefixTables = null;
+    		}
+    		if(type == FatTreeGraph.EDGE)
+    		{
+    			((FatTreeRoutingAlgorithm)ra).prefixTables = null;
+    			((FatTreeRoutingAlgorithm)ra).corePrefixTables = null;
+    		}
+    		if(type == FatTreeGraph.CORE)
+    		{
+    			((FatTreeRoutingAlgorithm)ra).prefixTables = null;
+    			((FatTreeRoutingAlgorithm)ra).suffixTables = null;
+    		}
+    	}
+		return ra;
     }
+    
+    
 
 }
