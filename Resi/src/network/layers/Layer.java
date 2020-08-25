@@ -1,10 +1,10 @@
 package network.layers;
 
-import custom.fattree.FatTreeRoutingAlgorithm;
+import routing.RoutingAlgorithm;
 
 public abstract class Layer {
 
-	public FatTreeRoutingAlgorithm fatTreeRoutingAlgorithm;
+	public RoutingAlgorithm routingAlgorithm;
 	
 	public Layer() {
 		
