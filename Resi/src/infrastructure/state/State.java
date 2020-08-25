@@ -43,7 +43,7 @@ public class State {
 		        }
 		        else if(currentNode instanceof Switch){
 		            Switch sw = (Switch)currentNode;
-		            exitBuffer.getNode().networkLayer.controlFlow(exitBuffer);
+		            exitBuffer.getNode().getNetworkLayer().controlFlow(exitBuffer);
 		        }
 				break;
 			case X01:
@@ -66,7 +66,7 @@ public class State {
 		        else if(currentNode1 instanceof Switch){
 		            Switch sw = (Switch)currentNode1;
 		            // todo goi event E( goi ham controlFlow)
-		            exitBuffer1.getNode().networkLayer.controlFlow(exitBuffer1);
+		            exitBuffer1.getNode().getNetworkLayer().controlFlow(exitBuffer1);
 		        }
 
 		        Packet packet = exitBuffer1.getPeekPacket();
