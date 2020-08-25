@@ -186,5 +186,10 @@ public class FatTreeRoutingAlgorithm implements RoutingAlgorithm {
     {
     	return next(packet.getSource(), node.getId(), packet.getDestination());
     }
+    
+    public void build(Node node)
+    {
+    	
+    }
 
 }
