@@ -50,7 +50,7 @@ public class Topology {
         cordOfNodes = new HashMap<>();
         //Endof ThanhNT 14/10 add new statements to init property
 
-        NetworkLayer networkLayer = new NetworkLayer(routingAlgorithm);
+        //NetworkLayer networkLayer = new NetworkLayer(routingAlgorithm);
      // khoi tao switch va them vao list
         for (int sid : graph.switches()) {
             Switch sw = new Switch(sid);
@@ -62,7 +62,8 @@ public class Topology {
             //Endof ThanhNT 14/10 add new statements to add new ID of switch
 
             sw.physicalLayer = new PhysicalLayer(sw, graph.getK());
-            sw.networkLayer = networkLayer;
+            sw.networkLayer = //networkLayer;
+            		new NetworkLayer(routingAlgorithm);
         }
         
      // link from switch to switch
@@ -142,7 +143,8 @@ public class Topology {
             Host sourceNode = new Host(sourceNodeID);
             sourceNode.type = TypeOfHost.Source;
             sourceNode.physicalLayer = new PhysicalLayer(sourceNode);
-            sourceNode.networkLayer = networkLayer;
+            sourceNode.networkLayer = //networkLayer;
+            		new NetworkLayer(routingAlgorithm);
             hosts.add(sourceNode);
             hostById.put(sourceNodeID, sourceNode);
 
@@ -170,7 +172,8 @@ public class Topology {
         		hosts.add(destinationNode);
         		hostById.put(destinationNodeID, destinationNode);
         		destinationNode.physicalLayer = new PhysicalLayer(destinationNode);
-                destinationNode.networkLayer = networkLayer;
+                destinationNode.networkLayer = //networkLayer;
+                		new NetworkLayer(routingAlgorithm);
         	}
         	
            //ThanhNT 14/10 add new statements to add new ID of HOST
