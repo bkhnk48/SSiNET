@@ -6,7 +6,7 @@ import java.util.Map;
 import config.Constant;
 import custom.fattree.FatTreeRoutingAlgorithm;
 import events.EMovingInSwitchEvent;
-
+import infrastructure.entity.Node;
 import infrastructure.event.Event;
 import javatuples.Pair;
 import network.elements.EntranceBuffer;
@@ -17,7 +17,8 @@ import routing.RoutingAlgorithm;
 
 public class NetworkLayer extends Layer{
 	
-	public NetworkLayer(RoutingAlgorithm ra) {
+	public NetworkLayer(RoutingAlgorithm ra, Node node) {
+		
 		this.routingAlgorithm = ra;
 	}
 
