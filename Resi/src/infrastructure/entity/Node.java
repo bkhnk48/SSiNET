@@ -15,8 +15,8 @@ public abstract class Node extends Device {
 	public DataLinkLayer dataLinkLayer;
 	
 	
-	public void setNetworkLayer(RoutingAlgorithm ra) {
-		this.networkLayer = new NetworkLayer(ra);
+	public void setNetworkLayer(RoutingAlgorithm ra, Node node) {
+		this.networkLayer = new NetworkLayer(ra, node);
 	}
 	
 	public NetworkLayer getNetworkLayer() {
