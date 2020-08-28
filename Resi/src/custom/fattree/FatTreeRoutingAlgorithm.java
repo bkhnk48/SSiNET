@@ -224,6 +224,9 @@ public class FatTreeRoutingAlgorithm implements RoutingAlgorithm, Cloneable {
 		return ra;
     }
     
-    
+    public void update(Packet p, Node node)
+    {
+    	
+    }
 
 }
