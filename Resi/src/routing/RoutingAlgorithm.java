@@ -11,4 +11,6 @@ public interface RoutingAlgorithm {
     int next(Packet packet, Node node);
     
     RoutingAlgorithm build(Node node) throws CloneNotSupportedException;
+    
+    void update(Packet p, Node node);
 }
