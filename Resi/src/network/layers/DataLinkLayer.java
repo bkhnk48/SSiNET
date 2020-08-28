@@ -13,8 +13,7 @@ public class DataLinkLayer extends Layer {
 		this.packet = p;
 	}
 	
-	Map<Pair<Integer, Integer>, Integer> flowSizesPerDuration = new HashMap<>();
-	Map<Integer, Integer> outgoingTraffic = new HashMap();
+	
 	
 	public void update(Packet p)
 	{
