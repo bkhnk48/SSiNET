@@ -14,13 +14,14 @@ import java.util.Map;
 
 import common.StdOut;
 import config.Constant;
+import custom.fattree.FatTreeFlowClassifier;
 import custom.fattree.FatTreeGraph;
 import custom.fattree.FatTreeRoutingAlgorithm;
 import infrastructure.event.Event;
 import network.Topology;
 
 import network.entities.Host;
-
+import network.entities.Switch;
 import network.entities.TypeOfHost;
 import simulator.DiscreteEventSimulator;
 import weightedloadexperiment.pairstrategies.ForcePair;
@@ -123,7 +124,8 @@ public class ThroughputExperiment {
         //for(int timeOfRun = 0; timeOfRun < 100-3; timeOfRun++)
         {
             FatTreeGraph G = new FatTreeGraph(4);
-            FatTreeRoutingAlgorithm ra = new FatTreeRoutingAlgorithm(G, false);
+            FatTreeRoutingAlgorithm ra = //new FatTreeRoutingAlgorithm(G, false);
+            							new FatTreeFlowClassifier(G, false);
 
             //Integer[] hosts = G.hosts().toArray(new Integer[0]);
             
@@ -172,20 +174,27 @@ public class ThroughputExperiment {
                 if(host.type == TypeOfHost.Destination || host.type == TypeOfHost.Mix) {
                     Host destinationNode = host;
                     if (destinationNode.getReceivedPacketInNode() != 0) {
-                        /*System.out.println("DesNode " + destinationNode.getId() + " receives: "
-                                + destinationNode.getReceivedPacketInNode() + " packets "
-                                + "from " + destinationNode.getFirstTx() + " to " + (destinationNode.getLastRx())
-                        );*/
+                        
                         rxPacket += destinationNode.getReceivedPacketInNode();
                         privateThp = destinationNode.getReceivedPacketInNode()
                                 * Constant.PACKET_SIZE / (destinationNode.getLastRx() - destinationNode.getFirstTx());
                         thp += privateThp;
-                        //System.out.println("\t Private Throughput = " + privateThp);
+                        
                     }
                 }
             }
             
-            
+            for (int i = 0; i < topology.getSwitches().size(); i++) {
+                Switch nodeSwitch = topology.getSwitches().get(i);
+                System.out.print("\nSwitch has id: " + nodeSwitch.getId() + " \n");
+                //Map<Integer, Integer> outgoingTraffic
+                FatTreeFlowClassifier ftfc = (FatTreeFlowClassifier)nodeSwitch.getNetworkLayer().routingAlgorithm;
+                Map<Integer, Integer> outgoingTraffic = ftfc.outgoingTraffic;
+                for(Integer key: outgoingTraffic.keySet())
+                {
+                	System.out.println("\tFlow to node: " + key + " has capacity: " + outgoingTraffic.get(key));
+                }
+            }
             
             
             
