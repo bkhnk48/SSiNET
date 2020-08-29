@@ -26,15 +26,39 @@ public class DiscreteEventSimulator extends Simulator {
     private boolean isLimit;
     private double timeLimit;
     private boolean verbose;
+    private boolean isAssigned = false;
     public long totalHop = 0;
     
     public List<Integer> sizeOfCurrEvents = new ArrayList<Integer>();
     
+    private static final DiscreteEventSimulator des = new DiscreteEventSimulator(true, Constant.MAX_TIME, false);
     
     public int halfSizeOfEvents = 0;
-
     
-    public DiscreteEventSimulator(boolean isLimit, double timeLimit, boolean verbose) {
+    private static boolean IS_LIMIT = false, VERBOSE = false;
+    private static double TIME_LIMIT = 0;
+    
+    public static void Initialize(boolean isLimit, double timeLimit, boolean verbose)
+    {
+    	IS_LIMIT = isLimit;
+    	TIME_LIMIT = timeLimit;
+    	VERBOSE = verbose;
+    }
+
+    public static DiscreteEventSimulator getInstance()
+    {
+    	if(!des.isAssigned)
+    	{
+	    	des.isLimit = IS_LIMIT;
+	    	des.timeLimit = TIME_LIMIT;
+	    	des.verbose = VERBOSE;
+	    	des.receivedPacketPerUnit = new long[(int)(des.timeLimit/ Constant.EXPERIMENT_INTERVAL +1)];
+	    	des.isAssigned = true;
+    	}
+    	return des;
+    }
+    
+    private DiscreteEventSimulator(boolean isLimit, double timeLimit, boolean verbose) {
         super();
         this.isLimit = isLimit;
         this.verbose = verbose;
@@ -135,18 +159,18 @@ public class DiscreteEventSimulator extends Simulator {
 		for (Host host : allHosts) {
 			if (host.type != TypeOfHost.Destination) {//tuc no la source
 				//soonestEndTime will be updated later as events are executed
-				host.physicalLayer.sourceQueue.sim = this;
+				//host.physicalLayer.sourceQueue.sim = this;
 				halfSizeOfEvents++;
 				//soonestEndTime will be updated later as events are executed
 
 				//add uniWay of host(way from it)
 				UnidirectionalWay unidirectionalWay = host.physicalLayer.links.get(host.getId()).getWayToOtherNode(host);
-				unidirectionalWay.sim = this;
+				//unidirectionalWay.sim = this;
 				halfSizeOfEvents++;
 
 				int connectedNodeID = host.physicalLayer.links
 						.get(host.getId()).getOtherNode(host).getId();
-				host.physicalLayer.exitBuffers.get(connectedNodeID).sim = this;
+				//host.physicalLayer.exitBuffers.get(connectedNodeID).sim = this;
 				halfSizeOfEvents++;
 				
 			}
@@ -158,18 +182,18 @@ public class DiscreteEventSimulator extends Simulator {
 		for (Switch aSwitch : allSwitches) {
 			//add uniWay of switch(way from it)
 			for (Link link : aSwitch.physicalLayer.links.values()) {
-				link.getWayToOtherNode(aSwitch).sim = this;
+				//link.getWayToOtherNode(aSwitch).sim = this;
 				halfSizeOfEvents++;
 				
 			}
 			
 			for (ExitBuffer exitBuffer : aSwitch.physicalLayer.exitBuffers.values()) {
-				exitBuffer.sim = this;
+				//exitBuffer.sim = this;
 				halfSizeOfEvents++;
 			}
 			
 			for (EntranceBuffer entranceBuffer : aSwitch.physicalLayer.entranceBuffers.values()) {
-				entranceBuffer.sim = this;
+				//entranceBuffer.sim = this;
 				halfSizeOfEvents++;
 			}
 		}
@@ -182,53 +206,12 @@ public class DiscreteEventSimulator extends Simulator {
     public long selectNextCurrentTime(long currentTime)
     {
     	long result = Long.MAX_VALUE;
-		/*
-		 * result = this.allEvents.get(0).getEndTime();
-		 */
+		
     	return result;
     }
     
     
 
-    public void insertEvent(Event ev)
-    {
-		/*
-		 * long endTime = ev.getEndTime(); int anchor = allEvents.size(); int i = 0;
-		 * boolean found = false; boolean newButNotBiggest = false; Long[] keys = new
-		 * Long[ongoingExecutionTimes.keySet().size()];
-		 * ongoingExecutionTimes.keySet().toArray(keys); Arrays.sort(keys); while(i <
-		 * keys.length && !found) { if(endTime == keys[i]) { if(i < keys.length - 1) {
-		 * anchor = ongoingExecutionTimes.get(keys[i + 1]); } found = true;
-		 * newButNotBiggest = false; } else { if(endTime < keys[i] && !newButNotBiggest)
-		 * { anchor = ongoingExecutionTimes.get(keys[i]) ; newButNotBiggest = true; } }
-		 * i++; } if(found || newButNotBiggest) {
-		 * 
-		 * for(int j = 0; j < keys.length; j++) { if(keys[j] > endTime) { int value =
-		 * ongoingExecutionTimes.get(keys[j]); ongoingExecutionTimes.put(keys[j], value
-		 * + 1); } } } else {
-		 * 
-		 * ongoingExecutionTimes.put(endTime, allEvents.size() ); }
-		 * 
-		 * if(newButNotBiggest) { ongoingExecutionTimes.put(endTime, anchor ); }
-		 * 
-		 * allEvents.add(anchor, ev);
-		 */
-    	
-    }
 
-    
-    public void removeOneElement(long endTime)
-    {
-		/*
-		 * Long[] keys = new Long[ongoingExecutionTimes.keySet().size()];
-		 * ongoingExecutionTimes.keySet().toArray(keys); Arrays.sort(keys); int i = 0;
-		 * while(i < keys.length) { if(endTime <= keys[i]) { int value =
-		 * ongoingExecutionTimes.get(keys[i]); value--; if(value == 0) { if(i > 0) {
-		 * ongoingExecutionTimes.remove(keys[i-1]); } } if(value >= 0) {
-		 * ongoingExecutionTimes.put(keys[i], value); }
-		 * 
-		 * } i++; }
-		 */
-    }
 
 }
