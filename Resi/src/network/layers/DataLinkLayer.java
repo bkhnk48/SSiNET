@@ -1,9 +1,6 @@
 package network.layers;
 
-import java.util.HashMap;
-import java.util.Map;
 
-import javatuples.Pair;
 import network.elements.Packet;
 
 public class DataLinkLayer extends Layer {
