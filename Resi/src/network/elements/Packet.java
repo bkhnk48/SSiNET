@@ -6,13 +6,12 @@ import infrastructure.element.Element;
 import network.layers.DataLinkLayer;
 //import network.states.packet.StateP1;
 
-import java.util.List;
 
 /**
  * Created by Dandoh on 6/27/17.
  */
 public class Packet extends Element{
-    //public int id;
+ 
     private int source;
     private int destination;
     private int size;
@@ -21,10 +20,7 @@ public class Packet extends Element{
     private double endTime;
     public int nHop = 0; // tang 1 khi packet den switch??
 
-    private List<Integer> predeterminedPath;
-    public void setPredeterminedPath(List<Integer> predeterminedPath) {
-        this.predeterminedPath = predeterminedPath;
-    }
+    
 
     public DataLinkLayer dataLinkLayer;
 
