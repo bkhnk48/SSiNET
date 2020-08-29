@@ -3,9 +3,7 @@ package network.elements;
 import infrastructure.element.LimitedBuffer;
 import infrastructure.entity.Node;
 import network.states.enb.N0;
-import network.states.enb.N1;
 
-import java.util.ArrayList;
 
 public class EntranceBuffer extends LimitedBuffer {
     protected int nextNodeId;
