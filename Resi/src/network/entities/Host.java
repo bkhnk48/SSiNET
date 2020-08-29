@@ -40,7 +40,7 @@ public class Host extends Node {
 
        long time = (long)this.physicalLayer.simulator.time();
        Event ev = new AGenerationEvent(this.physicalLayer.simulator, time, time, this.physicalLayer.sourceQueue);
-       this.physicalLayer.sourceQueue.insertEvents(ev);
+       ev.register();
    }
    
    protected int receivedPacketInNode = 0;
