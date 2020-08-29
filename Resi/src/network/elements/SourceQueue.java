@@ -2,14 +2,12 @@ package network.elements;
 
 import config.Constant;
 import infrastructure.element.Buffer;
-import common.Queue;
-import java.util.*;
+
 
 
 //import network.states.packet.StateP1;
 import network.states.sourcequeue.*;
 
-import javax.xml.transform.Source;
 
 public class SourceQueue  extends Buffer{
     //todo nen bo  thuoc tinh desID di ko vi the nay chi gioi han moi sourceNode chi gui packet den duoc mot desNode duy nhat
@@ -36,12 +34,6 @@ public class SourceQueue  extends Buffer{
         setState( new Sq1(this));
     }
 
-//    public SourceQueue(SourceQueue sourceQueue){
-//        this.sourceId = sourceQueue.sourceId;
-//        this.destinationId = sourceQueue.destinationId;
-//        this.front = sourceQueue.front;
-//        this.state = sourceQueue.state;
-//    }
 
     public int getSourceId() {
         return sourceId;
@@ -101,6 +93,5 @@ public class SourceQueue  extends Buffer{
         return (double)(numGeneratedPacket +1) * Constant.HOST_DELAY;
     }
 
-    @Override
-    public void getNextState(){ }
+   
 }
