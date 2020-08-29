@@ -44,7 +44,10 @@ public class ThroughputExperiment {
     	long start = System.currentTimeMillis();
         System.out.println("Start:");
         
-        DiscreteEventSimulator simulator = new DiscreteEventSimulator(true, Constant.MAX_TIME, verbose);
+        DiscreteEventSimulator.Initialize(true, Constant.MAX_TIME, verbose);
+        
+        DiscreteEventSimulator simulator = //new DiscreteEventSimulator(true, Constant.MAX_TIME, verbose);
+        		DiscreteEventSimulator.getInstance();
         topology.clear(); // clear all the data, queue, ... in switches, hosts
         topology.setSimulator(simulator);
         
@@ -96,24 +99,7 @@ public class ThroughputExperiment {
 
         GraphPanel.createAndShowGui(scores);
 
-        if(false)
-        {
-	        // Export to filfp
-	        try {
-	            String fileName = "./src/results/throughput.txt";
-	            File file = new File(fileName);
-	            // creates the file
-	            file.createNewFile();
-	
-	            FileWriter writer = new FileWriter(file);
-	
-	            // Writes the content to the file
-	            writer.flush();
-	            writer.close();
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-        }
+        
 
         return points;
     }
@@ -151,9 +137,6 @@ public class ThroughputExperiment {
             List<Integer> destinationNodeIDs //= new ArrayList<>(); 
             								= topology.getDestinationNodeIDs();
             
-			
-			//sourceNodeIDs = pairGenerator.getSources();
-			//destinationNodeIDs = pairGenerator.getDestinations();
 
             int sizeOfFlow = //1;
                     sourceNodeIDs.size();
@@ -161,8 +144,7 @@ public class ThroughputExperiment {
             for (int i = 0; i < sizeOfFlow; i++) {
                 traffic.put(sourceNodeIDs.get(i), destinationNodeIDs.get(i));
             }
-            
-            
+
 
             experiment.calThroughput(traffic, false);
 
@@ -188,11 +170,14 @@ public class ThroughputExperiment {
                 Switch nodeSwitch = topology.getSwitches().get(i);
                 System.out.print("\nSwitch has id: " + nodeSwitch.getId() + " \n");
                 //Map<Integer, Integer> outgoingTraffic
-                FatTreeFlowClassifier ftfc = (FatTreeFlowClassifier)nodeSwitch.getNetworkLayer().routingAlgorithm;
-                Map<Integer, Integer> outgoingTraffic = ftfc.outgoingTraffic;
-                for(Integer key: outgoingTraffic.keySet())
+                if(nodeSwitch.getNetworkLayer().routingAlgorithm instanceof FatTreeFlowClassifier)
                 {
-                	System.out.println("\tFlow to node: " + key + " has capacity: " + outgoingTraffic.get(key));
+	                FatTreeFlowClassifier ftfc = (FatTreeFlowClassifier)nodeSwitch.getNetworkLayer().routingAlgorithm;
+	                Map<Integer, Long> outgoingTraffic = ftfc.outgoingTraffic;
+	                for(Integer key: outgoingTraffic.keySet())
+	                {
+	                	System.out.println("\tFlow to node: " + key + " has capacity: " + outgoingTraffic.get(key));
+	                }
                 }
             }
             
