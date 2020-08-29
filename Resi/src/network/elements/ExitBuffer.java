@@ -1,6 +1,5 @@
 package network.elements;
 
-import config.Constant;
 import infrastructure.element.LimitedBuffer;
 import infrastructure.entity.Node;
 import infrastructure.state.State;
