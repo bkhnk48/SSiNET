@@ -34,14 +34,14 @@ public class W0 extends State {
                     Event event = new CLeavingEXBEvent(
                     		exitBuffer.physicalLayer.simulator,
                     		time, time, exitBuffer, packet);
-                    exitBuffer.insertEvents(event); //chen them su kien moi vao
+                    event.register(); //chen them su kien moi vao
                 }
                 else if(exitBuffer.getNode() instanceof Switch){
                 	long time = (long)exitBuffer.physicalLayer.simulator.time();
                     Event event = new FLeavingSwitchEvent(
                     		exitBuffer.physicalLayer.simulator,
                     		time, time + Constant.SWITCH_CYCLE, exitBuffer, packet);
-                    exitBuffer.insertEvents(event); //chen them su kien moi vao
+                    event.register(); //chen them su kien moi vao
 
                 }
             }
