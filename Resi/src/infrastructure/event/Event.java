@@ -1,5 +1,6 @@
 package infrastructure.event;
 
+import events.IEventGenerator;
 import infrastructure.element.Element;
 import network.elements.Packet;
 import simulator.DiscreteEventSimulator;
@@ -10,7 +11,7 @@ public abstract class Event extends umontreal.ssj.simevents.Event{
 	protected long endTime;
 	public static int countSubEvent = 0;
 
-	protected Element element;
+	protected IEventGenerator element;
 	
 	
 	public Event(DiscreteEventSimulator sim, long time)
@@ -32,7 +33,7 @@ public abstract class Event extends umontreal.ssj.simevents.Event{
 		return endTime;
 	}
 
-	public Element getElement()
+	public IEventGenerator getElement()
 	{
 		return element;
 	}
@@ -52,5 +53,17 @@ public abstract class Event extends umontreal.ssj.simevents.Event{
 		this.element = element;
 	}
 
+	
+	/**
+	 * Xay dung phuong thuc insertEvent thuc hien viec
+	 * chen mot Event co ten la ev.
+	 * @param ev
+	 */
+	public void register()
+	{
+		DiscreteEventSimulator sim = DiscreteEventSimulator.getInstance();
+		if(sim == null) return;
+		sim.addEvent(this);
+	}
 
 }
