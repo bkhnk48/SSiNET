@@ -1,21 +1,29 @@
 package network.layers;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import config.Constant;
-import custom.fattree.FatTreeRoutingAlgorithm;
 import events.EMovingInSwitchEvent;
+import events.IEventGenerator;
 import infrastructure.entity.Node;
 import infrastructure.event.Event;
-import javatuples.Pair;
+import infrastructure.state.State;
 import network.elements.EntranceBuffer;
 import network.elements.ExitBuffer;
 import network.elements.Packet;
 import routing.RoutingAlgorithm;
 
 
-public class NetworkLayer extends Layer{
+public class NetworkLayer extends Layer implements IEventGenerator{
+	
+	protected State state;
+	public State getState() {
+		return state;
+	}
+	
+	public void setState(State state)
+	{
+		this.state = state;
+	}
 	
 	public NetworkLayer(RoutingAlgorithm ra, Node node) {
 		RoutingAlgorithm routingAlgorithm = null;
@@ -50,7 +58,7 @@ public class NetworkLayer extends Layer{
 						selectedENB.physicalLayer.simulator,
 						time, time + Constant.SWITCH_CYCLE,
 						selectedENB, selectedENB.getPeekPacket());
-				selectedENB.insertEvents(event); //chen them su kien moi vao
+				event.register(); //chen them su kien moi vao
 			}
 		}
 	}
@@ -75,5 +83,10 @@ public class NetworkLayer extends Layer{
 					.get(entranceBuffer.getNextNodeId());
 			controlFlow(exitBuffer);
 		}
+	}
+	
+	public long getDurrationTime()
+	{
+		return 1000*1000*1000;
 	}
 }
