@@ -13,7 +13,6 @@ import network.elements.UnidirectionalWay;
 
 import network.entities.Switch;
 //import network.states.packet.SStateP3;
-import network.states.unidirectionalway.W1;
 
 public class N0 extends State {
 	//�	State N0: ENB is not full.
@@ -29,7 +28,7 @@ public class N0 extends State {
         Event event = new HNotificationEvent(
         		entranceBuffer.physicalLayer.simulator,
         		time, time + Constant.CREDIT_DELAY, entranceBuffer);
-        entranceBuffer.insertEvents(event); //chen them su kien moi vao
+        event.register(); //chen them su kien moi vao
 
         UnidirectionalWay unidirectionalWay = entranceBuffer.physicalLayer.links
                 .get(entranceBuffer.getConnectNode().getId())
@@ -45,7 +44,7 @@ public class N0 extends State {
                 		time
                         , time + unidirectionalWay.getLink().getTotalLatency(packet.getSize())
                         , unidirectionalWay, packet);
-                unidirectionalWay.insertEvents(event); //chen them su kien moi vao
+                event.register(); //chen them su kien moi vao
 
             }
 
