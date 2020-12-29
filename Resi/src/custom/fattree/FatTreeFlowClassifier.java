@@ -13,9 +13,12 @@ import routing.RoutingAlgorithm;
 
 public class FatTreeFlowClassifier extends FatTreeRoutingAlgorithm {
 	
-	public Map<Pair<Integer, Integer>, Long> flowSizesPerDuration = new HashMap<>();
-	public Map<Integer, Long> outgoingTraffic = new HashMap<Integer, Long>();
-	public Map<Pair<Integer, Integer>, Long> flowTable = new HashMap<>();
+	//public Map<Pair<Integer, Integer>, Long> flowSizesPerDuration = new HashMap<>();
+	//public Map<Integer, Long> outgoingTraffic = new HashMap<Integer, Long>();
+	public Map<Pair<Integer, Integer>, Long> flowTables = new HashMap<>();//map tu 1 cap nguon dich den IP dau ra
+	public Map<Integer, Map<Integer, Integer>> flowTrafficPorts = new HashMap<>();//map so lan co goi tin di ra 1 cong
+	public Map<Integer, Map<Pair<Integer, Integer>, Integer>> flowTrafficTables = new HashMap<>();//map gia tri flow cua mot cap nguon dich
+	
 	private int currentNode;
 
 	public int getCurrentNode() {
