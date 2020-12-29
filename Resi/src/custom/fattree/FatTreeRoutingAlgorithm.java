@@ -21,6 +21,7 @@ import infrastructure.entity.Node;
  */
 public class FatTreeRoutingAlgorithm implements RoutingAlgorithm, Cloneable {
     public FatTreeGraph G;
+    public FlowClassifier flowClassifier = new FlowClassifier();
     public Map<Pair<Integer, Integer>, RoutingPath> precomputedPaths = new HashMap<>();
     public Map<Integer, Map<Integer, Integer>> suffixTables = new HashMap<>();
     
@@ -228,5 +229,16 @@ public class FatTreeRoutingAlgorithm implements RoutingAlgorithm, Cloneable {
     {
     	
     }
-
+	
+    public void increaseTrafficPorts(int port, Node current, int k = 4){
+	 //Tang bo dem so lan goi tin di qua cong (chi can quan tam den cong 2 va cong 3)
+	 if(port >= k/2){
+	     flowClassifier.flowTrafficPorts[current.id][port]++;
+	 }
+    }
+	
+    public void increaseTrafficTable(int source, int destination, int current){
+	 //Tang bo dem so lan goi tin di qua cong (chi can quan tam den cong 2 va cong 3)
+	 flowClassifier.flowTrafficTables[current][new Pair<>(source, destination)]++;
+    }
 }
